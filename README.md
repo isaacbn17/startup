@@ -8,7 +8,8 @@ This is going to be **BIG**!
 
 How much time is wasted when a group can't make a decision quickly?
 Have you ever wanted to know what everyone really wanted?
-This group voting software will allow you to:
-* Create a question and answers
-* Collect votes
+This group voting software will allow users to:
+* Easily create a question and answers
+* Collect votes from participants
 * See the results in real time
+It'll be quick, efficient, and let you know what you needed to!

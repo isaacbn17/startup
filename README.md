@@ -29,3 +29,11 @@ Finally, each user will be able to participate and see the results as they come 
 
 ![Results image](vote_results.jpg)
 
+## Key Features
+
+ - Secure login with an email
+ - Ability for the user to create a survey question with answers
+ - Able to publish the survey for respondents
+ - Respondents can submit an answer, and later change it if they so wish
+ - Results are shown live as participants submit their answer
+ - Past surveys and their results are saved for future reference

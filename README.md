@@ -21,7 +21,7 @@ This first image shows what the login page will look like. Clear and to the poin
 
 ![Login page](login_page.jpg)
 
-Next, the user will will be allowed to create a survey, as shown in the image below.
+Next, the user will will be allowed to create a survey, as shown in the image below. Additional answers can be added using the + button.
 
 ![Creating a survey](creating_survey.jpg)
 
@@ -31,11 +31,11 @@ Finally, each user will be able to participate and see the results as they come 
 
 ## Key Features
 
- - Secure login with an email
- - Ability for the user to create a survey question with answers
- - Able to publish the survey for respondents
+ - Logging in with an email
+ - Users can create a survey question with answers
+ - The survey can be published for participants
  - Respondents can submit an answer, and later change it if they so wish
- - Results are shown live as participants submit their answer
+ - Results are shown live as answers are submitted
  - Past surveys and their results are saved for future reference
 
 ## Technologies

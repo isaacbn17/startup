@@ -37,3 +37,15 @@ Finally, each user will be able to participate and see the results as they come 
  - Respondents can submit an answer, and later change it if they so wish
  - Results are shown live as participants submit their answer
  - Past surveys and their results are saved for future reference
+
+## Technologies
+
+The following technologies will be used on this website:
+
+ * **HTML** - This will be used for the design and organization of the website. There will be a page for logging in, surveying, seeing past results, and reading about the website.
+ * **CSS** - I'll use this to add a color scheme, making sure that the website is visually pleasing.
+ * **JavaScript** - This will be used as the user creates a survey for publication and as participants submit a response.
+ * **Web Service** - A service will be used for logging in and retrieving votes.
+ * **Login** - A survey can't be created or response submitted unless the user is logged in.
+ * **WebSocket** - This will be used to display the results live as they come in.
+ * **React** - The website will be made into a modern framework with this.

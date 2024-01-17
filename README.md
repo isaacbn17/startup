@@ -32,8 +32,8 @@ Finally, each user will be able to participate and see the results as they come 
 ## Key Features
 
  - Logging in with an email
- - Users can create a survey question with answers
- - The survey can be published for participants
+ - Creating a survey question with answers
+ - Publishing the survey for participants
  - Respondents can submit an answer, and later change it if they so wish
  - Results are shown live as answers are submitted
  - Past surveys and their results are saved for future reference

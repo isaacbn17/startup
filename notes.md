@@ -36,9 +36,30 @@ Comment: <!-- The comment -->
             <td>Normal text </td>
         </tr>
     </table>
+    <aside>
+    <span>
+    <div>
+    <section>
 
-### There's also:
-* aside
-* span
-* div
-* section
+```html
+<input type="____" > </input
+```
+Has a range of options. type =
+| Type           | Meaning                           |
+| -------------- | --------------------------------- |
+| text           | Single line textual value         |
+| password       | Obscured password                 |
+| email          | Email address                     |
+| tel            | Telephone number                  |
+| url            | URL address                       |
+| number         | Numerical value                   |
+| checkbox       | Inclusive selection               |
+| radio          | Exclusive selection               |
+| range          | Range limited number              |
+| date           | Year, month, day                  |
+| datetime-local | Date and time                     |
+| month          | Year, month                       |
+| week           | Week of year                      |
+| color          | Color                             |
+| file           | Local file                        |
+| submit         | button to trigger form submission |

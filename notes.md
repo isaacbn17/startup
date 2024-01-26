@@ -38,7 +38,7 @@ Comment: <!-- The comment -->
     </table>
 
 ### There's also:
-* <aside></aside>
-* <span></span>
-* <div></div>
-* <section></section>
+* aside
+* span
+* div
+* section

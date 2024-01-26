@@ -63,3 +63,18 @@ Has a range of options. type =
 | color          | Color                             |
 | file           | Local file                        |
 | submit         | button to trigger form submission |
+
+### Media Elements
+<img alt="mountain landscape" src="https://images.pexels.com/photos/164170/pexels-photo-164170.jpeg" /
+
+<audio controls src="testAudio.mp3"></audio --> autoplay and loop
+
+<video controls width="300" crossorigin="anonymous">
+  <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" />
+</video
+
+<svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" stroke="red" fill="red" style="border: 1px solid #000000">
+  <circle cx="150" cy="100" r="50" />
+</svg
+
+

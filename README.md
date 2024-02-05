@@ -49,3 +49,13 @@ The following technologies will be used on this website:
  * **Login** - A survey can't be created or response submitted unless the user is logged in.
  * **WebSocket** - This will be used to display the results live as they come in.
  * **React** - The website will be made into a modern framework with this.
+
+## HTML
+
+For this section I wrote code for the basic structure of my website.
+* There are four HTML pages. Each includes a menu bar that links to the other pages.
+* The index page welcomes the user to the website and lets them login, automatically connecting them to the survey page.
+* The survey page allows a user to create a survey and publish it. The published survey will show up here and this is where WebSockets will be used.
+* The results page is a database of the results of past surveys. A textual example is included.
+* The about page has a short description of the website and an embedded image.
+  

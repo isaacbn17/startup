@@ -43,7 +43,7 @@ footer {
     flex: 0 40px;
     position: fixed;
     bottom: 0;
-    width: 100%;
+    width: 100vw;
     font-family: 'Open Sans', sans-serif;
 }
 

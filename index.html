@@ -16,7 +16,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
     </head>
 
-    <body class="bg-success p-2" style="--bs-bg-opacity: .5;">
+    <body class="bg-success" style="--bs-bg-opacity: .5;">
 
         <header class="container-fluid">
             <nav class="navbar navbar-expand-lg bg-light">
@@ -55,13 +55,16 @@
                     <div class="col-auto">
                       <input type="email" id="inputemail" class="form-control" placeholder="example@gmail.com" required pattern=".*@.*" aria-describedby="passwordHelpInline">
                     </div> 
+                    <div class="col-auto">
+                        <button type="submit" id="login_button" class="btn btn-light">Login</button>
+                    </div>
+
                 </div>
                 <!-- <label type="text" for="Email">Email</label>
                 <input type="email" id="Email" placeholder="example@gmail.com" required pattern=".*@.*"> -->
                 <!-- <label for="InputEmail" class="form-label">Email address</label>
                 <input type="email" class="form-control" id="InputEmail" placeholder="example@gmail.com" required pattern=".*@.*" aria-describedby="emailHelp"> -->
                 <!-- <button type="submit">Login</button> -->
-                <button type="submit" id="login_button" class="btn btn-light">Login</button>
             </form>
         </main>
 

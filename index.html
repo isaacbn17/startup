@@ -13,7 +13,7 @@
         crossorigin="anonymous">
     </head>
 
-    <body class="bg-success text-dark">
+    <body>
 
         <header class="container-fluid">
             <nav class="navbar navbar-expand-lg bg-light">
@@ -45,9 +45,21 @@
         <main>
             <h2>Welcome to Group Voting</h2>
             <form method="get" action="survey.html">
-                <label type="text" for="Email">Email</label>
-                <input type="email" id="Email" placeholder="example@gmail.com" required pattern=".*@.*">
-                <button type="submit">Login</button>
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                      <label for="inputemail" class="col-form-label">Email</label>
+                    </div>
+                    <div class="col-auto">
+                      <input type="email" id="inputemail" class="form-control" placeholder="example@gmail.com" required pattern=".*@.*" aria-describedby="passwordHelpInline">
+                    </div>
+                    
+                </div>
+                <!-- <label type="text" for="Email">Email</label>
+                <input type="email" id="Email" placeholder="example@gmail.com" required pattern=".*@.*"> -->
+                <!-- <label for="InputEmail" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="InputEmail" placeholder="example@gmail.com" required pattern=".*@.*" aria-describedby="emailHelp"> -->
+                <!-- <button type="submit">Login</button> -->
+                <button type="submit" id="login_button" class="btn btn-light">Login</button>
             </form>
         </main>
 

@@ -25,6 +25,10 @@ main {
     font-family: 'Open Sans', sans-serif;
 }
 
+.survey_content {
+    justify-content: center;
+}
+
 .sinput {
     padding: 0.5em;
     margin: 0.25em;
@@ -37,6 +41,10 @@ main {
 
 h2 {
     padding: 0.5em;
+}
+
+.results {
+    justify-content: flex-start;
 }
 
 img {

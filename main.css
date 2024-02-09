@@ -25,10 +25,32 @@ h2 {
     padding: 0.5em;
 }
 
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
 #login_button {
     margin: 1;
 }
 
 footer {
     flex: 0 40px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
+
+@media (max-height: 600px) {
+    header {
+      display: none;
+    }
+    footer {
+      display: none;
+    }
+    main {
+      flex: 1 100vh;
+    }
+  }

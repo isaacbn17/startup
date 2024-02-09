@@ -11,6 +11,7 @@ body {
 
 header {
     flex: 0 100px;
+    width: 100%;
 }
 
 main {
@@ -20,8 +21,18 @@ main {
     height: 100%;
     align-items: center;
     justify-content: center;
-    text-align: center;
+    /* text-align: center; */
     font-family: 'Open Sans', sans-serif;
+}
+
+.sinput {
+    padding: 0.5em;
+    margin: 0.25em;
+    font-size: 20px;
+}
+
+.user {
+    font-size: 25px;
 }
 
 h2 {

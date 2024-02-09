@@ -1,11 +1,12 @@
 * {
-    background-color: #afe0fa;
+    /* background-color: #afe0fa; */
 }
 
 body {
     display: flex;
     flex-direction: column;
     min-width: 375px;
+    height: 100%;
 }
 
 header {
@@ -16,9 +17,11 @@ main {
     flex: 1;
     display: flex;
     flex-direction: column;
+    height: 100%;
     align-items: center;
     justify-content: center;
     text-align: center;
+    font-family: 'Open Sans', sans-serif;
 }
 
 h2 {
@@ -41,6 +44,12 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+    font-family: 'Open Sans', sans-serif;
+}
+
+html {
+    margin: 0px;
+    height: 100%;
 }
 
 @media (max-height: 600px) {

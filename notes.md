@@ -77,4 +77,59 @@ Has a range of options. type =
   <circle cx="150" cy="100" r="50" />
 </svg
 
+## JavaScript
 
+console.log('hello');
+
+// OUTPUT: hello
+
+console.log('%c JavaScript Demo', 'font-size:1.5em; color:green;');
+
+// OUTPUT: JavaScript Demo //in large green text
+
+console.time('demo time');
+
+// ... some code that takes a long time.
+
+console.timeEnd('demo time');
+
+// OUTPUT: demo time: 9762.74 ms
+
+console.count('a');
+// OUTPUT: a: 1
+
+console.count('a');
+// OUTPUT: a: 2
+
+console.count('b');
+// OUTPUT: b: 1
+
+
+# Adding JavaScript to HTML
+
+You can insert JavaScript into HTML either by directly including it in the HTML within the content of a `<script>` element, or by using the `src` attribute of the script element to reference an external JavaScript file.
+
+**index.js**
+
+```js
+function sayHello() {
+  console.log('hello');
+}
+```
+
+**index.html**
+
+```html
+<head>
+  <script src="javascript.js"></script>
+</head>
+<body>
+  <button onclick="sayHello()">Say Hello</button>
+  <button onclick="sayGoodbye()">Say Goodbye</button>
+  <script>
+    function sayGoodbye() {
+      alert('Goodbye');
+    }
+  </script>
+</body>
+```

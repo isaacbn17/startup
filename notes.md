@@ -77,8 +77,8 @@ Has a range of options. type =
   <circle cx="150" cy="100" r="50" />
 </svg
 
-## JavaScript
-
+# **JavaScript**
+```
 console.log('hello');
 
 // OUTPUT: hello
@@ -103,9 +103,9 @@ console.count('a');
 
 console.count('b');
 // OUTPUT: b: 1
+```
 
-
-# Adding JavaScript to HTML
+## Adding JavaScript to HTML
 
 You can insert JavaScript into HTML either by directly including it in the HTML within the content of a `<script>` element, or by using the `src` attribute of the script element to reference an external JavaScript file.
 
@@ -133,3 +133,51 @@ function sayHello() {
   </script>
 </body>
 ```
+## Document Object Module
+
+Some functions:
+**document.querySelectorAll('__')**
+```
+const listElements = document.querySelectorAll('p');
+for (const el of listElements) {
+  console.log(el.textContent);
+}
+```
+**document.createElement('div')**
+**document.querySelector()**
+**.appendChild()**
+```
+function insertChild(parentSelector, text) {
+  const newChild = document.createElement('div');
+  newChild.textContent = text;
+
+  const parentElement = document.querySelector(parentSelector);
+  parentElement.appendChild(newChild);
+}
+
+insertChild('#courses', 'new course');
+```
+**.removeChild()**
+```
+function deleteElement(elementSelector) {
+  const el = document.querySelector(elementSelector);
+  el.parentElement.removeChild(el);
+}
+
+deleteElement('#courses div');
+```
+**Event Listeners**
+```
+const submitDataEl = document.querySelector('#submitData');
+submitDataEl.addEventListener('click', function (event) {
+  console.log(event.type);
+});
+```
+## Local Storage
+
+Functions:
+* setItem(name, value)
+* Example: localStorage.setItem('user', 'Grace')
+* getItem(name)
+* removeItem(name)
+* clear()   Clears all items in local storage

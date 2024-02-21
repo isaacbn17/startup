@@ -58,4 +58,14 @@ For this section I wrote code for the basic structure of my website.
 * The survey page allows a user to create a survey and publish it. The published survey will show up here and this is where WebSockets will be used.
 * The results page is a database of the results of past surveys. A textual example is included.
 * The about page has a short description of the website and an embedded image.
+
+## CSS
+
+For this section I really made the website look nice!
+* **Header, footer, and main content body** - These are all styled and consistent on all pages. The header and footer remain the same size when the window size changes and disappear if it gets too small.
+* **Navigation elements** - I added a navigation bar from bootstrap that functions well on different screen sizes.
+* **Responsive to window resizing** - This works! Elements always remain in place. The text in the main section of the page is always readable.
+* **Application elements** - I added a very nice light green color to all the pages. Things are spaced well and just look good.
+* **Application text content** - I'm using a font from Google fonts that I think looks really good on all the pages.
+* **Application images** - My image on the about page always remains centered and at 50% of the width of the page.
   

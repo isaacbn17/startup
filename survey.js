@@ -31,6 +31,7 @@ function publishSurvey(event) {
 }
 
 function displaySurvey(question, answers) {
+    window.location.href = 'publishedSurvey.html';
     survey_container = document.getElementById('survey_container');
 
     const questionElement = document.createElement('h2');
@@ -49,4 +50,5 @@ function displaySurvey(question, answers) {
         answerlist.appendChild(answerElement);
     });
     survey_container.appendChild(answerlist);
+
 }

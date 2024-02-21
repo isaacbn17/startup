@@ -29,14 +29,14 @@
                   <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                       <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.html">Login</a>
+                        <a class="nav-link" href="index.html">Login</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" href="survey.html">Survey</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="publishedSurvey.html">Published Surveys</a>
-                      </li>
+                        <a class="nav-link active" aria-current="page" href="publishedSurvey.html">Published Surveys</a>
+                    </li>
                       <li class="nav-item">
                         <a class="nav-link" href="results.html">Past Results</a>
                       </li>
@@ -50,26 +50,8 @@
         </header>
 
         <main>
-            <h2>Welcome to Group Voting</h2>
-            <form method="get" action="survey.html">
-                <div class="row g-3 align-items-center">
-                    <div class="col-auto">
-                      <label for="inputemail" class="col-form-label">Email</label>
-                    </div>
-                    <div class="col-auto">
-                      <input type="email" id="inputemail" class="form-control" placeholder="example@gmail.com" required pattern=".*@.*" aria-describedby="passwordHelpInline">
-                    </div> 
-                    <div class="col-auto">
-                        <button type="submit" id="login_button" class="btn btn-light" onclick="login()">Login</button>
-                    </div>
-
-                </div>
-                <!-- <label type="text" for="Email">Email</label>
-                <input type="email" id="Email" placeholder="example@gmail.com" required pattern=".*@.*"> -->
-                <!-- <label for="InputEmail" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="InputEmail" placeholder="example@gmail.com" required pattern=".*@.*" aria-describedby="emailHelp"> -->
-                <!-- <button type="submit">Login</button> -->
-            </form>
+            <h2>Published Surveys</h2>
+            <div id="survey_container"></div>
         </main>
 
         <hr \>

@@ -4,34 +4,34 @@ function getPlayerName() {
 
 const userNameEl = document.querySelector('.user-email');
 console.log(userNameEl)
-userNameEl.textContent = this.getPlayerName();    
+userNameEl.textContent = this.getPlayerName();   
 
-// const surveyQuestion = document.querySelector('#question');
-// localStorage.setItem('question', surveyQuestion.value);
-// const answerOne = document.querySelector('#answer1')
-// localStorage.setItem('answer1', answerOne.value);
-// const answerTwo = document.querySelector('#answer2');
-// localStorage.setItem('answer2', answerTwo);
-// const answerThree = document.querySelector('#answer3');
-// localStorage.setItem('answer3', answerThree);
-// const answerFour = document.querySelector('#answer4');
-// localStorage.setItem('answer4', answerFour);
-
-function publishSurvey() {
-    const surveyQuestion = document.querySelector('#question');
+function publishSurvey(event) {
+    event.preventDefault();
+    const surveyQuestion = document.querySelector('#question').value;
+    //console.log(surveyQuestion)
     const answers = [];
     for (i=1; i<=4; i++) {
-        const answer = document.getElementById(`answer${i}`)
+        const answer = document.getElementById(`answer${i}`).value;
         if (answer !== '') {
             answers.push(answer);
         }
     }
+    //console.log(answers)
+    const formData = {
+        data: {
+            question: surveyQuestion,
+            answers: answers
+        }
+    };
+    console.log(formData.data);
+    console.log(JSON.parse(JSON.stringify(formData)).data);
+
     displaySurvey(surveyQuestion, answers)
 }
 
 function displaySurvey(question, answers) {
     survey_container = document.getElementById('survey_container');
-    survey_container.innerHTML = '';
 
     const questionElement = document.createElement('h2');
     questionElement.textContent = question;
@@ -40,9 +40,13 @@ function displaySurvey(question, answers) {
     const answerlist = document.createElement('ul');
     answers.forEach(answer => {
         const answerElement = document.createElement('li');
-        answerElement.textContent = answer;
+        const text = document.createElement('span');
+        text.textContent = answer;
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        answerElement.appendChild(text);
+        answerElement.appendChild(checkbox);
         answerlist.appendChild(answerElement);
-        }
-    );
+    });
     survey_container.appendChild(answerlist);
 }

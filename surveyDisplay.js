@@ -27,7 +27,7 @@ function displaySurvey(question, answers) {
 
         const text = document.createElement('span');
         text.textContent = answer;
-        text.classList.add('answerText')
+        text.classList.add('answerText');
         answerElement.appendChild(text);
 
         answerlist.appendChild(answerElement);
@@ -37,11 +37,11 @@ function displaySurvey(question, answers) {
         })
     });
 
-    const submit_button = document.createElement('button')
-    submit_button.classList.add('btn', 'btn-light')
-    submit_button.type = 'submit'
-    submit_button.textContent = 'Submit'
-    // submit_button.onclick(displayResults)
+    const submit_button = document.createElement('button');
+    submit_button.classList.add('btn', 'btn-light');
+    submit_button.type = 'submit';
+    submit_button.textContent = 'Submit';
+    submit_button.addEventListener('click', displayResults);
 
     survey_container.appendChild(answerlist);
     survey_container.appendChild(submit_button);

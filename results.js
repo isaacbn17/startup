@@ -7,5 +7,6 @@ document.addEventListener('DOMContentLoaded', function getResultsData() {
 
 
 function displayResults() {
+    window.location.href = 'results.html';
     console.log("Yay! You're figuring this out!")
 }

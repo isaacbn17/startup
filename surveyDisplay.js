@@ -18,11 +18,16 @@ function displaySurvey(question, answers) {
         const answerElement = document.createElement('li');
         const text = document.createElement('span');
         text.textContent = answer;
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
+        const button = document.createElement('input');
+        button.type = 'radio';
+
         answerElement.appendChild(text);
-        answerElement.appendChild(checkbox);
+        answerElement.appendChild(button);
         answerlist.appendChild(answerElement);
     });
+    
+    const submit_button = document.createElement('input')
+    submit_button.type = 'submit'
     survey_container.appendChild(answerlist);
+    survey_container.appendChild(submit_button);
 }

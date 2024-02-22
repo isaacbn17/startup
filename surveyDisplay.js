@@ -14,20 +14,31 @@ function displaySurvey(question, answers) {
     survey_container.appendChild(questionElement);
 
     const answerlist = document.createElement('ul');
+    answerlist.classList.add('answerPublished')
     answers.forEach(answer => {
         const answerElement = document.createElement('li');
+        answerElement.classList.add('answerEl')
+        
         const text = document.createElement('span');
         text.textContent = answer;
+        text.classList.add('answerText')
+
         const button = document.createElement('input');
         button.type = 'radio';
+        button.classList.add('radioButton');
+        button.name = 'radioButton';
+    
 
-        answerElement.appendChild(text);
         answerElement.appendChild(button);
+        answerElement.appendChild(text);
         answerlist.appendChild(answerElement);
     });
-    
-    const submit_button = document.createElement('input')
+
+    const submit_button = document.createElement('button')
+    submit_button.classList.add('btn', 'btn-light')
     submit_button.type = 'submit'
+    submit_button.textContent = 'Submit'
+
     survey_container.appendChild(answerlist);
     survey_container.appendChild(submit_button);
 }

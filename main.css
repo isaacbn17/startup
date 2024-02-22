@@ -40,6 +40,19 @@ h2 {
     font-size: 25px
 }
 
+.answerPublished {
+    list-style-type: none;
+    font-size: 20px;
+}
+
+.answerEl {
+    padding: 0.5em;
+}
+
+.radioButton {
+    margin-right: 5px;
+}
+
 .about {
     font-size:25px;
     text-align: center;

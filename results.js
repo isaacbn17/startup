@@ -43,7 +43,7 @@ function displayResults(surveyData, count) {
 
     for (const key in count) {
         const ansEl = document.createElement('td');
-        const answerStr = key + '\n' + ' Count: ' + count[key];
+        const answerStr = key + ' - ' + count[key] + ' votes';
         ansEl.textContent = answerStr;
         tableRow.appendChild(ansEl);
     };

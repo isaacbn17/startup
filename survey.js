@@ -20,12 +20,17 @@ function publishSurvey(event) {
         question: surveyQuestion,
         answers: answers
     };
-
     console.log(formData.question);
     console.log(formData.answers)
-    console.log(JSON.stringify(formData).question);
-    console.log(JSON.stringify(formData).answers);
-
+    console.log(JSON.stringify(formData.question));
+    console.log(JSON.stringify(formData.answers));
     localStorage.setItem('surveyData', JSON.stringify(formData));
+
+    const results = {}
+    answers.forEach(answer => {
+        results[answer] = 0;
+    });
+    localStorage.setItem('resultsCount', JSON.stringify(results));
+
     window.location.href = 'publishedSurvey.html';
 }

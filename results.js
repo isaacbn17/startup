@@ -1,12 +1,27 @@
 document.addEventListener('DOMContentLoaded', function getResultsData() {
-    const surveyResults = JSON.parse(localStorage.getItem('surveyResults'));
-    if (surveyResults) {
-        displayResults(surveyResults.response);
+    const selectedAnswer = JSON.parse(localStorage.getItem('selectedAnswer'));
+    if (selectedAnswer) {
+        count = updateCount(selectedAnswer);
+        displayResults(count);
     }
 });
 
-
-function displayResults() {
+function goToResults () {
     window.location.href = 'results.html';
-    console.log("Yay! You're figuring this out!")
 }
+
+function updateCount(answer) {
+    console.log('Arrived at updateCount');
+    const resultsCount = JSON.parse(localStorage.getItem('resultsCount'));
+    resultsCount[answer] = (resultsCount[answer] + 1);
+    localStorage.setItem('resultsCount', JSON.stringify(resultsCount));
+    console.log(resultsCount);
+    return resultsCount;
+}
+
+function displayResults(count) {
+    console.log("Yay! You're figuring this out!")
+    console.log(count)
+
+}
+

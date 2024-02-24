@@ -33,7 +33,7 @@ function displaySurvey(question, answers) {
         answerlist.appendChild(answerElement);
 
         button.addEventListener('click', function saveAnswer() {
-            localStorage.setItem('selectedAnswer', answerElement.outerHTML)
+            localStorage.setItem('selectedAnswer', JSON.stringify(text.textContent))
         })
     });
 
@@ -41,7 +41,7 @@ function displaySurvey(question, answers) {
     submit_button.classList.add('btn', 'btn-light');
     submit_button.type = 'submit';
     submit_button.textContent = 'Submit';
-    submit_button.addEventListener('click', displayResults);
+    submit_button.addEventListener('click', goToResults);
 
     survey_container.appendChild(answerlist);
     survey_container.appendChild(submit_button);

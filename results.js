@@ -33,12 +33,20 @@ function displayResults(surveyData, count) {
     console.log(question.textContent);
     tableRow.appendChild(question);
     
-    surveyData.answers.forEach(answer => {
-        const answerEl = document.createElement('td');
-        answerEl.classList.add('resultAnswer');
-        answerEl.textContent = answer;
-        tableRow.appendChild(answerEl);
-    })
+    // surveyData.answers.forEach(answer => {
+    //     const answerEl = document.createElement('td');
+    //     answerEl.classList.add('resultAnswer');
+    //     answerEl.textContent = answer;
+
+    //     tableRow.appendChild(answerEl);
+    // })
+
+    for (const key in count) {
+        const ansEl = document.createElement('td');
+        const answerStr = key + '\n' + ' Count: ' + count[key];
+        ansEl.textContent = answerStr;
+        tableRow.appendChild(ansEl);
+    };
 
     resultsContainer.appendChild(tableRow);
 

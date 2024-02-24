@@ -3,16 +3,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const surveyData = JSON.parse(localStorage.getItem('surveyData'));
     if (selectedAnswer) {
         count = updateCount(selectedAnswer);
+        localStorage.removeItem('selectedAnswer');
         displayResults(surveyData, count);
     }
-});
+    else {
+        count = JSON.parse(localStorage.getItem('resultsCount'));
+        displayResults(surveyData, count);
+    }
 
-// function goToResults () {
-//     window.location.href = 'results.html';
-//     var event = new Event('functionExecuted');
-//     document.dispatchEvent(event);
-//     console.log('Ran goToResults');
-// }
+});
 
 function updateCount(answer) {
     console.log('Arrived at updateCount');

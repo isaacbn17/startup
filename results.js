@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function getResultsData() {
+document.addEventListener('DOMContentLoaded', function () {
     const selectedAnswer = JSON.parse(localStorage.getItem('selectedAnswer'));
     const surveyData = JSON.parse(localStorage.getItem('surveyData'));
     if (selectedAnswer) {
@@ -7,30 +7,31 @@ document.addEventListener('DOMContentLoaded', function getResultsData() {
     }
 });
 
-function goToResults () {
-    window.location.href = 'results.html';
-}
+// function goToResults () {
+//     window.location.href = 'results.html';
+//     var event = new Event('functionExecuted');
+//     document.dispatchEvent(event);
+//     console.log('Ran goToResults');
+// }
 
 function updateCount(answer) {
     console.log('Arrived at updateCount');
     const resultsCount = JSON.parse(localStorage.getItem('resultsCount'));
+    console.log("Results count: ")
+    console.log(resultsCount);
     resultsCount[answer] = (resultsCount[answer] + 1);
     localStorage.setItem('resultsCount', JSON.stringify(resultsCount));
+    console.log("Results count updated: ")
     console.log(resultsCount);
     return resultsCount;
 }
 
 function displayResults(surveyData, count) {
-    console.log("Yay! You're figuring this out!");
-    console.log(surveyData.question);
-    console.log(count);
-
     const resultsContainer = document.getElementById('resultsContainer');
     const tableRow = document.createElement('tr');
 
     const question = document.createElement('td');
     question.textContent = surveyData.question;
-    console.log(question.textContent);
     tableRow.appendChild(question);
     
     // surveyData.answers.forEach(answer => {

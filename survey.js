@@ -31,6 +31,7 @@ function publishSurvey(event) {
         results[answer] = 0;
     });
     localStorage.setItem('resultsCount', JSON.stringify(results));
+    console.log(localStorage.getItem('resultsCount'));
 
-    window.location.href = 'publishedSurvey.html';
+    // window.location.href = 'publishedSurvey.html';
 }

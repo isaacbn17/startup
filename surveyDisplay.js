@@ -41,8 +41,11 @@ function displaySurvey(question, answers) {
     submit_button.classList.add('btn', 'btn-light');
     submit_button.type = 'submit';
     submit_button.textContent = 'Submit';
-    submit_button.addEventListener('click', goToResults);
+    submit_button.addEventListener('click', function () {
+        window.location.href = 'results.html';
+    });
 
     survey_container.appendChild(answerlist);
     survey_container.appendChild(submit_button);
+    console.log("End of surveyDisplay.js")
 }

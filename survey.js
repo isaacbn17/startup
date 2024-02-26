@@ -3,7 +3,7 @@ function getPlayerName() {
     }
 
 const userNameEl = document.querySelector('.user-email');
-console.log(userNameEl)
+// console.log(userNameEl);
 userNameEl.textContent = this.getPlayerName();   
 
 function publishSurvey(event) {
@@ -16,22 +16,36 @@ function publishSurvey(event) {
             answers.push(answer);
         }
     }
+
+    // Sets surveyData
     const formData = {
         question: surveyQuestion,
         answers: answers
     };
-    console.log(formData.question);
-    console.log(formData.answers)
-    console.log(JSON.stringify(formData.question));
-    console.log(JSON.stringify(formData.answers));
-    localStorage.setItem('surveyData', JSON.stringify(formData));
+    // console.log(formData.question);
+    // console.log(formData.answers);
+    // console.log(JSON.stringify(formData.question));
+    // console.log(JSON.stringify(formData.answers));
+    let surveyData = JSON.parse(localStorage.getItem('surveyData'));
+    console.log(surveyData);
+    if (surveyData !== null) {
+        surveyData.push(formData);
+    }
+    else {
+        surveyData = [];
+        console.log('Made a surveyData list.');
+        surveyData.push(formData);
+        console.log(surveyData);
+    }
+    console.log(surveyData);
+    localStorage.setItem('surveyData', JSON.stringify(surveyData));
 
-    const results = {}
+    const results = {};
     answers.forEach(answer => {
         results[answer] = 0;
     });
     localStorage.setItem('resultsCount', JSON.stringify(results));
-    console.log(localStorage.getItem('resultsCount'));
+    // console.log(localStorage.getItem('resultsCount'));
 
-    // window.location.href = 'publishedSurvey.html';
+    window.location.href = 'publishedSurvey.html';
 }

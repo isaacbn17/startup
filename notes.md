@@ -73,7 +73,10 @@ Has a range of options. type =
 
 <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" stroke="red" fill="red" style="border: 1px solid #000000">
   <circle cx="150" cy="100" r="50" />
-</svg
+</svg >
+
+# CSS
+![CSS box](css_box.jpg)
 
 # JavaScript
 

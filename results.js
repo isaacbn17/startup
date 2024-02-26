@@ -30,7 +30,7 @@ function displayResults(surveyData, count) {
 
     surveyData.forEach(survey => {
         const tableRow = document.createElement('tr');
-        
+
         const question = document.createElement('td');
         question.textContent = survey.question;
         tableRow.appendChild(question);
@@ -45,10 +45,3 @@ function displayResults(surveyData, count) {
         resultsContainer.appendChild(tableRow);
     });
 }
-
-        // for (const key in count) {
-        //     const ansEl = document.createElement('td');
-        //     const answerStr = key + ' - ' + count[key] + ' votes';
-        //     ansEl.textContent = answerStr;
-        //     tableRow.appendChild(ansEl);
-        // };

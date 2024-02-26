@@ -3,6 +3,12 @@ document.addEventListener('DOMContentLoaded', function getSurveyData() {
     if (survey) {
         displaySurvey(survey.question, survey.answers);
     }
+    else {
+        messageContainer = document.getElementById('no_survey');
+        const message = document.createElement('h2');
+        message.textContent = 'Your published survey will show up here!'
+        messageContainer.appendChild(message);
+    }
 });
 
 function displaySurvey(question, answers) {

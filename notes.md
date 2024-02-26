@@ -1260,7 +1260,13 @@ text.replace(petRegex, 'animal');
 petRegex.test(text);
 // RETURNS: true
 ```
-
+Flag	Description
+g	Performs a global match, finding all matches rather than just the first.
+i	Makes matches case-insensitive. Matches both uppercase and lowercase.
+m	Performs multiline matches. (Changes behavior of ^,$)
+s	Allows . to match newline characters.
+u	Enables Unicode support.
+y	Matches are sticky, looking only at exact position in the text.
 
 # JavaScript rest and spread
 

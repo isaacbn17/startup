@@ -27,27 +27,28 @@ function updateCount(answer) {
 
 function displayResults(surveyData, count) {
     const resultsContainer = document.getElementById('resultsContainer');
-    const tableRow = document.createElement('tr');
 
-    const question = document.createElement('td');
-    question.textContent = surveyData.question;
-    tableRow.appendChild(question);
-    
-    // surveyData.answers.forEach(answer => {
-    //     const answerEl = document.createElement('td');
-    //     answerEl.classList.add('resultAnswer');
-    //     answerEl.textContent = answer;
-
-    //     tableRow.appendChild(answerEl);
-    // })
-
-    for (const key in count) {
-        const ansEl = document.createElement('td');
-        const answerStr = key + ' - ' + count[key] + ' votes';
-        ansEl.textContent = answerStr;
-        tableRow.appendChild(ansEl);
-    };
-
-    resultsContainer.appendChild(tableRow);
-
+    surveyData.forEach(survey => {
+        const tableRow = document.createElement('tr');
+        
+        const question = document.createElement('td');
+        question.textContent = survey.question;
+        tableRow.appendChild(question);
+        
+        survey.answers.forEach(answer => {
+            const answerEl = document.createElement('td');
+            answerEl.classList.add('resultAnswer');
+            const answerStr = answer + ' - ' + count[answer] + ' votes';
+            answerEl.textContent = answerStr;
+            tableRow.appendChild(answerEl);
+        })
+        resultsContainer.appendChild(tableRow);
+    });
 }
+
+        // for (const key in count) {
+        //     const ansEl = document.createElement('td');
+        //     const answerStr = key + ' - ' + count[key] + ' votes';
+        //     ansEl.textContent = answerStr;
+        //     tableRow.appendChild(ansEl);
+        // };

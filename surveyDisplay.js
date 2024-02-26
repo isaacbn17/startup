@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function getSurveyData() {
-    const surveyData = JSON.parse(localStorage.getItem('surveyData'));
-    if (surveyData) {
-        displaySurvey(surveyData.question, surveyData.answers);
+    const survey = JSON.parse(localStorage.getItem('currentSurvey'));
+    if (survey) {
+        displaySurvey(survey.question, survey.answers);
     }
 });
 

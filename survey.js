@@ -1,5 +1,5 @@
 function getPlayerName() {
-    return localStorage.getItem('userName') ?? 'Myster Player';
+    return localStorage.getItem('userName') ?? 'Unkown User';
     }
 
 const userNameEl = document.querySelector('.user-email');
@@ -22,6 +22,7 @@ function publishSurvey(event) {
         question: surveyQuestion,
         answers: answers
     };
+    localStorage.setItem('currentSurvey', JSON.stringify(formData));
     // console.log(formData.question);
     // console.log(formData.answers);
     // console.log(JSON.stringify(formData.question));
@@ -40,10 +41,19 @@ function publishSurvey(event) {
     console.log(surveyData);
     localStorage.setItem('surveyData', JSON.stringify(surveyData));
 
-    const results = {};
-    answers.forEach(answer => {
-        results[answer] = 0;
-    });
+    let results = JSON.parse(localStorage.getItem('resultsCount'));
+    if (results !== null) {
+        answers.forEach(answer => {
+            results[answer] = 0;
+        });
+    }
+    else {
+        results = {};
+        answers.forEach(answer => {
+            results[answer] = 0;
+        });
+    }
+
     localStorage.setItem('resultsCount', JSON.stringify(results));
     // console.log(localStorage.getItem('resultsCount'));
 

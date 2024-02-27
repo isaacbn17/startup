@@ -3,6 +3,167 @@ Elastic IP Address: 44.193.31.209
 Creating a record for a website on Route 53 allows me to use my domain name (http://groupvoting.click)
 to navigate to my website and not just the IP address (http://44.193.31.209).
 
+# Domain names
+
+
+In the instruction about the internet we showed how an IP address can be referenced by a domain name. You can get the IP address for any domain using the `dig` console utility. Notice that in the following example there are actually multiple IP addresses associated with the domain name `amazon.com`. This allows for redundancy in case one of the IP addresses fails to successfully resolve to a valid connection because the server listening at that IP address is not responding.
+
+```sh
+➜  dig amazon.com
+
+amazon.com.		126	IN	A	205.251.242.103
+amazon.com.		126	IN	A	52.94.236.248
+amazon.com.		126	IN	A	54.239.28.85
+```
+
+A domain name is simply a text string that follows a specific naming convention and is listed in a special database called the domain name registry.
+
+Domain names are broken up into a root domain, with one or more possible subdomain prefixes. The root domain is represented by a secondary level domain and a top level domain. The top level domain (TLD) represent things like `com`, `edu`, or `click`. So a root domain would look something like `byu.edu`, `google.com`, or `cs260.click`. The [possible list of TLDs](https://www.icann.org/resources/pages/tlds-2012-02-25-en) is controlled by ICANN, one of the governing boards of the internet.
+
+![Domain name parts](domainNameParts.jpg)
+
+The owner of a root domain can create any number of subdomains off the root domain. Each subdomain may resolve to a different IP address. So the owner of `cs260.click` can have subdomains for travel (`travel.cs260.click`), finance (`finance.cs260.click`), or a blog (`blog.cs260.click`).
+
+You can get information about a domain name from the domain name registry using the `whois` console utility.
+
+```yaml
+➜  whois byu.edu
+
+Domain Name: BYU.EDU
+
+Registrant:
+	Brigham Young University
+	3009 ITB
+	2027 ITB
+	Provo, UT 84602
+	USA
+
+Administrative Contact:
+	Mark Longhurst
+	Brigham Young University
+	Office of Information Technology
+	1208 ITB
+	Provo, UT 84602
+	USA
+	+1.8014220488
+	markl@byu.edu
+
+Technical Contact:
+	Brent Goodman
+	Brigham Young University
+	Office of Information Technology
+	1203J ITB
+	Provo, UT 84602
+	USA
+	+1.8014227782
+	dnsmaster@byu.edu
+
+Domain record activated:    19-Jan-1987
+Domain record last updated: 11-Jul-2022
+Domain expires:             31-Jul-2025
+```
+
+This provides information such as a technical contact to talk to if there is a problem with the domain, and an administrative contact to talk to if you want to buy the domain. Maybe we should talk to Mark and see if he is willing to sell.
+
+## DNS
+
+Once a domain name is in the registry it can be listed with a domain name system (DNS) server and associated with an IP address. Of course you must also lease the IP address before you can use it to uniquely identify a device on the internet, but that is a topic for another time. Every DNS server in the world references a few special DNS servers that are considered the `authoritative name servers` for associating a domain name with an IP address.
+
+The DNS database records that facilitate the mapping of domain names to IP addresses come in several flavors. The main ones we are concerned with are the `address` (`A`) and the `canonical name` (`CNAME`) records. An `A` record is a straight mapping from a domain name to IP address. A `CNAME` record maps one domain name to another domain name. This acts as a domain name alias. You would use a CNAME to do things like map `byu.com` to the same IP address as `byu.edu` so that either one could be used.
+
+When you enter a domain name into a browser, the browser first checks to see if it has the name already in its cache of names. If it does not, it contacts a DNS server and gets the IP address. The DNS server also keeps a cache of names. If the domain name is not in the cache, it will request the name from an `authoritative name server`. If the authority does not know the name then you get an unknown domain name error. If the process does resolve, then the browser makes the HTTP connection to the associated IP address.
+
+As you can see, there is a lot of levels of name caching. This is done for performance reasons, but it also can be frustrating when you are trying to update the information associated with your domain name. This is where the `time to live` (`TTL`) setting for a domain record comes into play. You can set this to be something short like 5 minutes or as long as several days. The different caching layers should then honor the TTL and clear their cache after the requested period has passed.
+
+
+
+# The Console
+
+
+Before the creation of graphical user interfaces, all computing systems were simple console environments consisting as of a prompt for inputting a command and the display of the command output. All of the original programming tools ran as console application. The console tradition is still actively used by professional developers and most programming tools execute within a console window.
+
+Also known as the command line, shell, or terminal, the console window is an essential web development tool. The console provides access to the file system and allows for the execution of command line applications.
+
+
+### Testing your console application
+
+Once you have a acceptable console application on your development computer, open it up and make sure you can run a simple POSIX compliant command such as `printf 'hello\n'`.
+
+![Console printf](consolePrintf.jpg)
+
+If this displays `hello` then you are on the right track. If that doesn't work then you are using a console application that is not POSIX compliant. For example, Windows Powershell will not work.
+
+## Viewing the file system
+
+One of the primary purposes of a console application is to view the files on the computer. The files on a computer are organized into a tree structure of nodes called directories. At any given point in time your console is located at one of the directories in the file system. You can see which directory you are in with the `pwd` (present working directory) command.
+
+```sh
+➜  pwd
+
+/Users/student/byu//webprogramming260
+```
+
+You can list all of the files in the directory with `ls` (list files). Most command line applications take parameters that are specified after you type the application name. For example, `ls` can list all files (even hidden ones) in a long format if you provide the parameter `-la`.
+
+```sh
+➜ ls -la
+
+total 16
+-rw-r--r--  1 lee  staff   1.0K Nov 19 08:47 LICENSE
+-rw-r--r--  1 lee  staff    82B Nov 19 08:47 README.md
+drwxr-xr-x  4 lee  staff   128B Nov 19 08:48 profile
+drwxr-xr-x  4 lee  staff   128B Nov 19 08:47 react
+```
+
+## Executing commands
+
+The other primary purpose of the console is to execute commands. You already did this in the previous section when you executed commands for working with the file system. However, console commands can perform many different operations. Here are some basic commands that you show experiment with.
+
+- **echo** - Output the parameters of the command
+- **cd** - Change directory
+- **mkdir** - Make directory
+- **rmdir** - Remove directory
+- **rm** - Remove file(s)
+- **mv** - Move file(s)
+- **cp** - Copy files
+- **ls** - List files
+- **curl** - Command line client URL browser
+- **grep** - Regular expression search
+- **find** - Find files
+- **top** - View running processes with CPU and memory usage
+- **df** - View disk statistics
+- **cat** - Output the contents of a file
+- **less** - Interactively output the contents of a file
+- **wc** - Count the words in a file
+- **ps** - View the currently running processes
+- **kill** - Kill a currently running process
+- **sudo** - Execute a command as a super user (admin)
+- **ssh** - Create a secure shell on a remote computer
+- **scp** - Securely copy files to a remote computer
+- **history** - Show the history of commands
+- **ping** - Check if a website is up
+- **tracert** - Trace the connections to a website
+- **dig** - Show the DNS information for a domain
+- **man** - Look up a command in the manual
+
+You can also chain the input and output of commands using special characters
+
+- `|` - Take the output from the command on the left and _pipe_, or pass, it to the command on the right
+- `>` - Redirect output to a file. Overwrites the file if it exists
+- `>>` - Redirect output to a file. Appends if the file exists
+
+For example, you can list the files in a directory, pipe it into `grep` to search for files created in Nov, and then pipe that into `wc` to count the number of files found with a date of Nov.
+
+```
+ls -l | grep ' Nov ' | wc -l
+```
+
+There are also keystrokes that have special meaning in the console.
+
+- `CTRL-R` - Use type ahead to find previous commands
+- `CTRL-C` - Kill the currently running command
+
+
 ## **HTML Syntax**
 
 Comment: <!-- The comment -->

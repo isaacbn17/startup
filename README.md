@@ -71,8 +71,8 @@ For this section I really made the website look nice!
 
 ## JavaScript
 
-For this section, I made my website completely functional.
-* **Future login** - The login page stores the email the user inputs in localStorage and outputs it on the create survey page.
+For this section, I made my website completely functional (for a single user).
+* **Login** - The login page stores the email the user inputs in localStorage and outputs it on the create survey page.
 * **Database data** - Database data is stored in localStorage. An array is created that stores each of the surveys that has been created. An object is created for each of the answers and its count. Each survey is displayed on the results page along with the count of how many times each answer was voted for.
-* **Future WebSocket** - On the about page, every seven seconds a message changes. It starts out as "Happy birthday to you" and adds "and you" every sevon seconds.
+* **Future WebSocket** - On the about page, a setInterval function changes a message every seven seconds. It starts out as "Happy birthday to you" and adds "and you" periodically.
 * **Application's interaction logic** - When a user logs in, they are immediately taken to the create survey page. The question and answers inputed are saved in localStorage and displayed on the publish survey page when the survey is published. Before a survey is created, text appears that says, "Your published survey will show up here!" An answer can be selected and submitted on the published survey page. A count for each of the answers is stored and the count is updated when the answer is submitted. This count, along with the survey question and answers is displayed on the results page. Multiple surveys can be created and their answers stored.

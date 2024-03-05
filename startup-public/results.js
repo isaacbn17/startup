@@ -1,3 +1,23 @@
+async function loadResults() {
+    let results = [];
+    try {
+        const response = await fetch('/api/results');
+        results = await response.json();
+
+        localStorage.setItem('surveyResults');
+    } catch {
+        const surveyResultsText = localStorage.getItem('surveyResults');
+        if (surveyDataText) {
+            results = JSON.parse(surveyDataText);
+        }
+    }
+    displayResults(results);
+}
+
+loadResults();
+
+
+
 document.addEventListener('DOMContentLoaded', function () {
     const selectedAnswer = JSON.parse(localStorage.getItem('selectedAnswer'));
     const surveyData = JSON.parse(localStorage.getItem('surveyData'));
@@ -10,7 +30,6 @@ document.addEventListener('DOMContentLoaded', function () {
         count = JSON.parse(localStorage.getItem('resultsCount'));
         displayResults(surveyData, count);
     }
-
 });
 
 function updateCount(answer) {

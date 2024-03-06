@@ -60,13 +60,13 @@ function publishSurveyLocal (formData) {
 
     let results = JSON.parse(localStorage.getItem('resultsCount'));
     if (results !== null) {
-        answers.forEach(answer => {
+        formData.answers.forEach(answer => {
             results[answer] = 0;
         });
     }
     else {
         results = {};
-        answers.forEach(answer => {
+        formData.answers.forEach(answer => {
             results[answer] = 0;
         });
     }

@@ -1,33 +1,29 @@
-const express = require('express)');
+const express = require('express');
 const app = express();
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
 app.use(express.json());
 
-app.use(express.static('public'));
+app.use(express.static('startup-public'));
 
 const apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
-apiRouter.get('/results', (_req, res) => {
-    res.send(results);
-});
-
-apiRouter.post('/result', (req, res) => {
-    results = displayResults(req.body, results);
-    res.send(results);
-});
+apiRouter.post('/survey', (req, res) => {
+    updateSurveyData(JSON.parse(req.body));
+    res.send(JSON.stringify(surveyData));
+})
 
 app.use((_req, res) => {
-    res.sendFile('index.html', { root: 'public'});
+    res.sendFile('index.html', { root: 'startup-public'});
 });
 
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });
 
-let results = [];
-function updateResults(newResult, results) {
-    //
+let surveyData = [];
+function updateSurveyData(newSurvey) {
+    surveyData.push(newSurvey);
 }

@@ -16,9 +16,16 @@ async function publishSurvey(event) {
             answers.push(answer);
         }
     }
+
+    const results = {};
+    answers.forEach(answer => {
+        results[answer] = 0;
+    });
+
     const formData = {
         question: surveyQuestion,
-        answers: answers
+        answers: answers,
+        resultsCount: results
     };
 
     // Sets surveyData using backend
@@ -32,14 +39,8 @@ async function publishSurvey(event) {
         // Store what the service gave us as the survey
         const surveyData = await response.json();
         localStorage.setItem('surveyData', JSON.stringify(surveyData));
-    }
-    catch {
+    } catch {
         publishSurveyLocal(formData);
-    }
-
-    // Sets resultsCount using backend
-    try {
-        const response = await fetch
     }
     window.location.href = 'publishedSurvey.html';
 };

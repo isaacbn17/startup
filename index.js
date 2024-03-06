@@ -27,3 +27,7 @@ app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });
 
+let results = [];
+function updateResults(newResult, results) {
+    //
+}

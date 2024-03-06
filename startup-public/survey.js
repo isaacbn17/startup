@@ -6,7 +6,7 @@ const userNameEl = document.querySelector('.user-email');
 // console.log(userNameEl);
 userNameEl.textContent = this.getPlayerName();   
 
-function publishSurvey(event) {
+async function publishSurvey(event) {
     event.preventDefault();
     const surveyQuestion = document.querySelector('#question').value;
     const answers = [];
@@ -16,29 +16,45 @@ function publishSurvey(event) {
             answers.push(answer);
         }
     }
-
-    // Sets surveyData
     const formData = {
         question: surveyQuestion,
         answers: answers
     };
+
+    // Sets surveyData using backend
+    try {
+        const response = await fetch('/api/survey', {
+            method: 'POST',
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify(formData),
+        });
+
+        // Store what the service gave us as the survey
+        const surveyData = await response.json();
+        localStorage.setItem('surveyData', JSON.stringify(surveyData));
+    }
+    catch {
+        publishSurveyLocal(formData);
+    }
+
+    // Sets resultsCount using backend
+    try {
+        const response = await fetch
+    }
+    window.location.href = 'publishedSurvey.html';
+};
+
+
+function publishSurveyLocal (formData) {
     localStorage.setItem('currentSurvey', JSON.stringify(formData));
-    // console.log(formData.question);
-    // console.log(formData.answers);
-    // console.log(JSON.stringify(formData.question));
-    // console.log(JSON.stringify(formData.answers));
     let surveyData = JSON.parse(localStorage.getItem('surveyData'));
-    console.log(surveyData);
     if (surveyData !== null) {
         surveyData.push(formData);
     }
     else {
         surveyData = [];
-        console.log('Made a surveyData list.');
         surveyData.push(formData);
-        console.log(surveyData);
     }
-    console.log(surveyData);
     localStorage.setItem('surveyData', JSON.stringify(surveyData));
 
     let results = JSON.parse(localStorage.getItem('resultsCount'));
@@ -53,9 +69,6 @@ function publishSurvey(event) {
             results[answer] = 0;
         });
     }
-
     localStorage.setItem('resultsCount', JSON.stringify(results));
-    // console.log(localStorage.getItem('resultsCount'));
-
     window.location.href = 'publishedSurvey.html';
-}
+};

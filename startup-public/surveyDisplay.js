@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', async function getSurveyData() {
 function displaySurvey(question, answers) {
     console.log(question)
     console.log(answers)
+    console.log("You did it!")
     survey_container = document.getElementById('survey_container');
     survey_container.innerHTML = '';
 

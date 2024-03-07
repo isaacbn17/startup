@@ -1,55 +1,70 @@
-// async function loadResults() {
-//     let results = [];
-//     try {
-//         const response = await fetch('/api/results');
-//         results = await response.json();
-
-//         localStorage.setItem('surveyResults');
-//     } catch {
-//         const surveyResultsText = localStorage.getItem('surveyResults');
-//         if (surveyDataText) {
-//             results = JSON.parse(surveyDataText);
-//         }
-//     }
-//     displayResults(results);
-// }
-
-// loadResults();
-
 document.addEventListener('DOMContentLoaded', async function () {
     const selectedAnswer = JSON.parse(localStorage.getItem('selectedAnswer'));
+
     try {
-        const response = await fetch('/api/results')
+        const response = await fetch('/api/results');
         surveyData = await response.json();
-    }
-    catch {
-        const surveyData = JSON.parse(localStorage.getItem('surveyData'));
-    }
-    if (selectedAnswer) {
-        count = updateCount(selectedAnswer);
-        localStorage.removeItem('selectedAnswer');
+        if (selectedAnswer) {
+            count = updateCount(selectedAnswer, surveyData);
+            console.log("The updated count is:");
+            console.log(count)
+            localStorage.removeItem('selectedAnswer');
+            try {
+                const response = await fetch('/api/results', {
+                    method: 'POST',
+                    headers: {'content-type': 'application/json'},
+                    body: JSON.stringify(surveyData)
+                });
+            }
+            catch {
+                //
+            }
+        }
+        else {
+            console.log("We're at the else part...");
+            count = surveyData[surveyData.length-1].resultsCount;
+            console.log(count);
+        }
+
+
         displayResults(surveyData, count);
     }
-    else {
-        count = JSON.parse(localStorage.getItem('resultsCount'));
-        displayResults(surveyData, count);
+    catch (e) {
+        console.error("It didn't quite work\n" + e)
+        // const surveyData = JSON.parse(localStorage.getItem('surveyData'));
     }
+
 });
 
-async function updateCount(answer) {
-    try {
-        const response = await fetch('/api/results')
-        surveyData = await response.json();
-        surveyData.resultsCount[answer] = (surveyData.resultsCount[answer] + 1);
-        return surveyData.resultsCount;
-    }
-    catch {
-        const resultsCount = JSON.parse(localStorage.getItem('resultsCount'));
-        resultsCount[answer] = (resultsCount[answer] + 1);
-        localStorage.setItem('resultsCount', JSON.stringify(resultsCount));
-        return resultsCount;
-    }
+function updateCount(answer, surveys) {
+    console.log("Participant's answer: ")
+    console.log(answer);
+    // Change the count for the most recently published survey
+    surveyData[surveys.length-1].resultsCount[answer]++;
+    return surveyData[surveys.length-1].resultsCount;
 };
+
+
+// async function updateCount(answer) {
+//     try {
+//         const response = await fetch('/api/results')
+//         surveyData = await response.json();
+//         sLength = surveyData.length;
+//         console.log(sLength);
+//         console.log(surveyData[sLength-1].resultsCount);
+//         // Change the count for the most recently published survey
+//         surveyData[sLength-1].resultsCount[answer]++;
+//         console.log("this order is weird")
+//         console.log(surveyData[sLength-1].resultsCount);
+//         return surveyData[sLength-1].resultsCount;
+//     }
+//     catch {
+//         const resultsCount = JSON.parse(localStorage.getItem('resultsCount'));
+//         resultsCount[answer] = (resultsCount[answer] + 1);
+//         localStorage.setItem('resultsCount', JSON.stringify(resultsCount));
+//         return resultsCount;
+//     }
+// };
 
 function displayResults(surveyData, count) {
     const resultsContainer = document.getElementById('resultsContainer');

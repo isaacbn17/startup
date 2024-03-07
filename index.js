@@ -23,6 +23,11 @@ apiRouter.get('/results', (_req, res) => {
     res.send(surveyData);
   });
 
+apiRouter.post('/results', (req, res) => {
+    updateSurveyData(JSON.parse(req.body));
+    res.send(JSON.stringify(surveyData));
+});
+
 app.use((_req, res) => {
     res.sendFile('index.html', { root: 'startup-public'});
 });

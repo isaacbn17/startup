@@ -5,28 +5,32 @@ document.addEventListener('DOMContentLoaded', async function () {
         const response = await fetch('/api/results');
         surveyData = await response.json();
         if (selectedAnswer) {
-            count = updateCount(selectedAnswer, surveyData);
+            [count, surveys] = updateCount(selectedAnswer, surveyData);
             console.log("The updated count is:");
             console.log(count)
             localStorage.removeItem('selectedAnswer');
-            try {
-                const response = await fetch('/api/results', {
-                    method: 'POST',
-                    headers: {'content-type': 'application/json'},
-                    body: JSON.stringify(surveyData)
-                });
-            }
-            catch {
-                //
-            }
+            console.log('The surveys are: ')
+            console.log(surveys)
+            // try {
+            //     const response = await fetch('/api/results', {
+            //         method: 'POST',
+            //         headers: {'content-type': 'application/json'},
+            //         body: JSON.stringify(surveys)
+            //     });
+
+            //     const newSurveys = await response.json();
+            //     console.log(newSurveys);
+            // }
+            // catch (e) {
+            //     console.error('Something went wrong\n' + e);
+            // }
         }
         else {
             console.log("We're at the else part...");
             count = surveyData[surveyData.length-1].resultsCount;
             console.log(count);
         }
-
-
+        console.log(count);
         displayResults(surveyData, count);
     }
     catch (e) {
@@ -41,7 +45,7 @@ function updateCount(answer, surveys) {
     console.log(answer);
     // Change the count for the most recently published survey
     surveyData[surveys.length-1].resultsCount[answer]++;
-    return surveyData[surveys.length-1].resultsCount;
+    return [surveyData[surveys.length-1].resultsCount, surveyData];
 };
 
 

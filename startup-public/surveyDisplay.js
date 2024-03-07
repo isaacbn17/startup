@@ -11,6 +11,19 @@ document.addEventListener('DOMContentLoaded', function getSurveyData() {
     }
 });
 
+// Display survey from backend
+// async function displaySurvey() {
+//     try {
+//         const response = await fetch('/api/publishedSurvey', {
+//             method: 'GET',
+            
+//         })
+//     }
+// };
+
+// displaySurvey();
+
+
 function displaySurvey(question, answers) {
     survey_container = document.getElementById('survey_container');
     survey_container.innerHTML = '';
@@ -43,15 +56,16 @@ function displaySurvey(question, answers) {
         })
     });
 
+    
+
     const submit_button = document.createElement('button');
     submit_button.classList.add('btn', 'btn-light');
     submit_button.type = 'submit';
     submit_button.textContent = 'Submit';
-    submit_button.addEventListener('click', function () {
+    submit_button.addEventListener('click', () => {
         window.location.href = 'results.html';
     });
 
     survey_container.appendChild(answerlist);
     survey_container.appendChild(submit_button);
-    console.log("End of surveyDisplay.js")
 }

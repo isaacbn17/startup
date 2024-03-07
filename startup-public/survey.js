@@ -6,7 +6,7 @@ const userNameEl = document.querySelector('.user-email');
 // console.log(userNameEl);
 userNameEl.textContent = this.getPlayerName();   
 
-async function publishSurvey(event) {
+async function publishSurvey() {
     // event.preventDefault();
     const surveyQuestion = document.querySelector('#question').value;
     const answers = [];

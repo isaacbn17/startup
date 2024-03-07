@@ -74,7 +74,6 @@
                     <label type="text" class="sinput" for="answer4">Answer</label>
                     <input type="text" class="sinput" id="answer4" name="answer4" placeholder="Survey Answer">
                     <br>
-                    <input name="Submit"  type="submit" value="Publish"/>
                     <button type="submit" id="publish_button" class="btn btn-light" >Publish</button>
                     <!-- // onclick="publishSurvey(event)" -->
 
@@ -84,8 +83,7 @@
             <script>
                 function handleFormSubmit(event) {
                     event.preventDefault();
-                    console.log("It worked")
-                    publishSurvey(event);
+                    publishSurvey();
                 }
                 document.getElementById('surveyForm').addEventListener('submit', handleFormSubmit);
             </script>

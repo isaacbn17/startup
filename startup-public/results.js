@@ -17,10 +17,15 @@ async function loadResults() {
 loadResults();
 
 
-
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
     const selectedAnswer = JSON.parse(localStorage.getItem('selectedAnswer'));
-    const surveyData = JSON.parse(localStorage.getItem('surveyData'));
+    try {
+        const response = await fetch('/api/results')
+        surveyData = await response.json();
+    }
+    catch {
+        const surveyData = JSON.parse(localStorage.getItem('surveyData'));
+    }
     if (selectedAnswer) {
         count = updateCount(selectedAnswer);
         localStorage.removeItem('selectedAnswer');
@@ -32,17 +37,20 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-function updateCount(answer) {
-    console.log('Arrived at updateCount');
-    const resultsCount = JSON.parse(localStorage.getItem('resultsCount'));
-    console.log("Results count: ")
-    console.log(resultsCount);
-    resultsCount[answer] = (resultsCount[answer] + 1);
-    localStorage.setItem('resultsCount', JSON.stringify(resultsCount));
-    console.log("Results count updated: ")
-    console.log(resultsCount);
-    return resultsCount;
-}
+async function updateCount(answer) {
+    try {
+        const response = await fetch('/api/results')
+        surveyData = await response.json();
+        surveyData.resultsCount[answer] = (surveyData.resultsCount[answer] + 1);
+        return surveyData.resultsCount;
+    }
+    catch {
+        const resultsCount = JSON.parse(localStorage.getItem('resultsCount'));
+        resultsCount[answer] = (resultsCount[answer] + 1);
+        localStorage.setItem('resultsCount', JSON.stringify(resultsCount));
+        return resultsCount;
+    }
+};
 
 function displayResults(surveyData, count) {
     const resultsContainer = document.getElementById('resultsContainer');

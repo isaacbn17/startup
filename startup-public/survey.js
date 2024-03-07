@@ -7,7 +7,7 @@ const userNameEl = document.querySelector('.user-email');
 userNameEl.textContent = this.getPlayerName();   
 
 async function publishSurvey(event) {
-    event.preventDefault();
+    // event.preventDefault();
     const surveyQuestion = document.querySelector('#question').value;
     const answers = [];
     for (i=1; i<=4; i++) {
@@ -44,7 +44,6 @@ async function publishSurvey(event) {
     }
     window.location.href = 'publishedSurvey.html';
 };
-
 
 function publishSurveyLocal (formData) {
     localStorage.setItem('currentSurvey', JSON.stringify(formData));

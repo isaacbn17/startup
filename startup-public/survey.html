@@ -57,28 +57,38 @@
             </div>
 
             <div class="survey">
-                <form action="/sumbit.form" method="post">
+                <form id="surveyForm" method="post">
                     <br>
                     <label type="text" class="sinput" for="question">Question </label>
-                    <input type="text" class="sinput" id="question" placeholder="Survey Question" required>
+                    <input type="text" class="sinput" id="question" name="question" placeholder="Survey Question" required>
                     <br>
                     <label type="text" class="sinput" for="answer1">Answer</label>
-                    <input type="text" class="sinput" id="answer1" placeholder="Survey Answer" required>
+                    <input type="text" class="sinput" id="answer1" name="answer1" placeholder="Survey Answer" required>
                     <br>
                     <label type="text" class="sinput" for="answer2">Answer</label>
-                    <input type="text" class="sinput" id="answer2" placeholder="Survey Answer">
+                    <input type="text" class="sinput" id="answer2" name="answer2" placeholder="Survey Answer" required>
                     <br>
                     <label type="text" class="sinput" for="answer3">Answer</label>
-                    <input type="text" class="sinput" id="answer3" placeholder="Survey Answer">
+                    <input type="text" class="sinput" id="answer3" name="answer3" placeholder="Survey Answer">
                     <br>
                     <label type="text" class="sinput" for="answer4">Answer</label>
-                    <input type="text" class="sinput" id="answer4" placeholder="Survey Answer">
+                    <input type="text" class="sinput" id="answer4" name="answer4" placeholder="Survey Answer">
                     <br>
-                    <!-- <input type="submit" value="Publish"> -->
-                    <button type="submit" id="publish_button" class="btn btn-light" onclick="publishSurvey(event)">Publish</button>
+                    <input name="Submit"  type="submit" value="Publish"/>
+                    <button type="submit" id="publish_button" class="btn btn-light" >Publish</button>
+                    <!-- // onclick="publishSurvey(event)" -->
+
                 </form>
             </div>
-            <!-- <div id="survey_container"></div> -->
+
+            <script>
+                function handleFormSubmit(event) {
+                    event.preventDefault();
+                    console.log("It worked")
+                    publishSurvey(event);
+                }
+                document.getElementById('surveyForm').addEventListener('submit', handleFormSubmit);
+            </script>
         </main>
 
         <hr \ >

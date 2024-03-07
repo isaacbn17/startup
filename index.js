@@ -13,7 +13,7 @@ app.use(`/api`, apiRouter);
 apiRouter.post('/survey', (req, res) => {
     updateSurveyData(JSON.parse(req.body));
     res.send(JSON.stringify(surveyData));
-})
+});
 
 app.use((_req, res) => {
     res.sendFile('index.html', { root: 'startup-public'});
@@ -26,4 +26,4 @@ app.listen(port, () => {
 let surveyData = [];
 function updateSurveyData(newSurvey) {
     surveyData.push(newSurvey);
-}
+};

@@ -11,7 +11,11 @@ const apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
 apiRouter.post('/survey', (req, res) => {
-    updateSurveyData(JSON.parse(req.body));
+    updateSurveyData(req.body);
+    res.send(JSON.stringify(surveyData));
+});
+
+apiRouter.get('/publishedSurvey', (req, res) => {
     res.send(JSON.stringify(surveyData));
 });
 

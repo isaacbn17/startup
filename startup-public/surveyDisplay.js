@@ -1,5 +1,20 @@
-document.addEventListener('DOMContentLoaded', function getSurveyData() {
-    const survey = JSON.parse(localStorage.getItem('currentSurvey'));
+document.addEventListener('DOMContentLoaded', async function getSurveyData() {
+    let survey = {};
+
+    try {
+        const response = await fetch('/api/publishedSurvey');
+        const surveys = await response.json();
+        let lengthSurveys = surveys.length;
+        // get most recent survey
+        survey = surveys[lengthSurveys-1];
+        console.log(survey)
+    }
+    catch (e) {
+        console.log("It caught a problem.")
+        console.error('Failed to print survey\n' + e)
+        // survey = JSON.parse(localStorage.getItem('currentSurvey'));
+    }
+
     if (survey) {
         displaySurvey(survey.question, survey.answers);
     }
@@ -11,20 +26,9 @@ document.addEventListener('DOMContentLoaded', function getSurveyData() {
     }
 });
 
-// Display survey from backend
-// async function displaySurvey() {
-//     try {
-//         const response = await fetch('/api/publishedSurvey', {
-//             method: 'GET',
-            
-//         })
-//     }
-// };
-
-// displaySurvey();
-
-
 function displaySurvey(question, answers) {
+    console.log(question)
+    console.log(answers)
     survey_container = document.getElementById('survey_container');
     survey_container.innerHTML = '';
 
@@ -56,7 +60,7 @@ function displaySurvey(question, answers) {
         })
     });
 
-    
+
 
     const submit_button = document.createElement('button');
     submit_button.classList.add('btn', 'btn-light');

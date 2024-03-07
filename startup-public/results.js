@@ -1,21 +1,20 @@
-async function loadResults() {
-    let results = [];
-    try {
-        const response = await fetch('/api/results');
-        results = await response.json();
+// async function loadResults() {
+//     let results = [];
+//     try {
+//         const response = await fetch('/api/results');
+//         results = await response.json();
 
-        localStorage.setItem('surveyResults');
-    } catch {
-        const surveyResultsText = localStorage.getItem('surveyResults');
-        if (surveyDataText) {
-            results = JSON.parse(surveyDataText);
-        }
-    }
-    displayResults(results);
-}
+//         localStorage.setItem('surveyResults');
+//     } catch {
+//         const surveyResultsText = localStorage.getItem('surveyResults');
+//         if (surveyDataText) {
+//             results = JSON.parse(surveyDataText);
+//         }
+//     }
+//     displayResults(results);
+// }
 
-loadResults();
-
+// loadResults();
 
 document.addEventListener('DOMContentLoaded', async function () {
     const selectedAnswer = JSON.parse(localStorage.getItem('selectedAnswer'));

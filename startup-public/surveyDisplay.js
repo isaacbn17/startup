@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', async function getSurveyData() {
     try {
         const response = await fetch('/api/publishedSurvey');
         const surveys = await response.json();
+        console.log(surveys);
         let lengthSurveys = surveys.length;
         // get most recent survey
         survey = surveys[lengthSurveys-1];

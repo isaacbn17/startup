@@ -11,19 +11,19 @@ document.addEventListener('DOMContentLoaded', async function () {
             localStorage.removeItem('selectedAnswer');
             console.log('The surveys are: ')
             console.log(surveys)
-            // try {
-            //     const response = await fetch('/api/results', {
-            //         method: 'POST',
-            //         headers: {'content-type': 'application/json'},
-            //         body: JSON.stringify(surveys)
-            //     });
+            try {
+                const response = await fetch('/api/results', {
+                    method: 'POST',
+                    headers: {'content-type': 'application/json'},
+                    body: JSON.stringify(surveys),
+                });
 
-            //     const newSurveys = await response.json();
-            //     console.log(newSurveys);
-            // }
-            // catch (e) {
-            //     console.error('Something went wrong\n' + e);
-            // }
+                const newSurveys = await response.json();
+                console.log(newSurveys);
+            }
+            catch (e) {
+                console.error('Something went wrong\n' + e);
+            }
         }
         else {
             console.log("We're at the else part...");

@@ -29,6 +29,8 @@ async function publishSurvey() {
     };
 
     // Sets surveyData using backend
+    console.log(formData);
+    console.log(JSON.stringify(formData));
     try {
         const response = await fetch('/api/survey', {
             method: 'POST',
@@ -38,9 +40,10 @@ async function publishSurvey() {
 
         // Store what the service gave us as the survey
         const surveyData = await response.json();
+        console.log(surveyData);
         localStorage.setItem('surveyData', JSON.stringify(surveyData));
     } catch {
-        publishSurveyLocal(formData);
+        // publishSurveyLocal(formData);
     }
     window.location.href = 'publishedSurvey.html';
 };

@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 
-const port = process.argv.length > 2 ? process.argv[2] : 4500;
+const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
 app.use(express.json());
 
@@ -11,12 +11,12 @@ const apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
 apiRouter.post('/survey', (req, res) => {
-    updateSurveyData(JSON.parse(req.body));
-    res.send(JSON.stringify(surveyData));
+    updateSurveyData(req.body);
+    res.send(surveyData);
 });
 
 apiRouter.get('/publishedSurvey', (req, res) => {
-    res.send(JSON.stringify(surveyData));
+    res.send(surveyData);
 });
 
 apiRouter.get('/results', (_req, res) => {
@@ -24,8 +24,9 @@ apiRouter.get('/results', (_req, res) => {
   });
 
 apiRouter.post('/results', (req, res) => {
-    updateSurveyData(JSON.parse(req.body));
-    res.send(JSON.stringify(surveyData));
+    editSurveyData(req.body);
+    console.log(surveyData);
+    res.send(surveyData);
 });
 
 app.use((_req, res) => {
@@ -40,3 +41,8 @@ let surveyData = [];
 function updateSurveyData(newSurvey) {
     surveyData.push(newSurvey);
 };
+
+function editSurveyData(surveys) {
+    surveyData.pop();
+    surveyData = surveys;
+}

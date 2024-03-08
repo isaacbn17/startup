@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     const selectedAnswer = JSON.parse(localStorage.getItem('selectedAnswer'));
 
     try {
+        let allSurveys = []
         const response = await fetch('/api/results');
         surveyData = await response.json();
         if (selectedAnswer) {
@@ -17,21 +18,17 @@ document.addEventListener('DOMContentLoaded', async function () {
                     headers: {'content-type': 'application/json'},
                     body: JSON.stringify(surveys),
                 });
-
-                const newSurveys = await response.json();
-                console.log(newSurveys);
+                allSurveys = await response.json();
             }
             catch (e) {
                 console.error('Something went wrong\n' + e);
             }
         }
         else {
-            console.log("We're at the else part...");
-            count = surveyData[surveyData.length-1].resultsCount;
-            console.log(count);
+            console.log("No answer was given.");
+            allSurveys = surveyData;
         }
-        console.log(count);
-        displayResults(surveyData, count);
+        displayResults(allSurveys);
     }
     catch (e) {
         console.error("It didn't quite work\n" + e)
@@ -48,32 +45,14 @@ function updateCount(answer, surveys) {
     return [surveyData[surveys.length-1].resultsCount, surveyData];
 };
 
-
-// async function updateCount(answer) {
-//     try {
-//         const response = await fetch('/api/results')
-//         surveyData = await response.json();
-//         sLength = surveyData.length;
-//         console.log(sLength);
-//         console.log(surveyData[sLength-1].resultsCount);
-//         // Change the count for the most recently published survey
-//         surveyData[sLength-1].resultsCount[answer]++;
-//         console.log("this order is weird")
-//         console.log(surveyData[sLength-1].resultsCount);
-//         return surveyData[sLength-1].resultsCount;
-//     }
-//     catch {
-//         const resultsCount = JSON.parse(localStorage.getItem('resultsCount'));
-//         resultsCount[answer] = (resultsCount[answer] + 1);
-//         localStorage.setItem('resultsCount', JSON.stringify(resultsCount));
-//         return resultsCount;
-//     }
-// };
-
-function displayResults(surveyData, count) {
+function displayResults(surveyData) {
     const resultsContainer = document.getElementById('resultsContainer');
 
     surveyData.forEach(survey => {
+        console.log("This survey is: ");
+        console.log(survey.question);
+        console.log(survey.resultsCount);
+
         const tableRow = document.createElement('tr');
 
         const question = document.createElement('td');
@@ -83,7 +62,7 @@ function displayResults(surveyData, count) {
         survey.answers.forEach(answer => {
             const answerEl = document.createElement('td');
             answerEl.classList.add('resultAnswer');
-            const answerStr = answer + ' - ' + count[answer] + ' votes';
+            const answerStr = answer + ' - ' + survey.resultsCount[answer] + ' votes';
             answerEl.textContent = answerStr;
             tableRow.appendChild(answerEl);
         })

@@ -79,7 +79,7 @@ For this section, I made my website completely functional (for a single user).
 
 ## Service
 
-For this deliverable I added backend endpoints that receives surveys and vote counts and returns the survey with vote totals. Now, anyone with my website URL is able to vote on the most recently published survey and see the results live!
+For this deliverable I added backend endpoints that receive surveys and vote counts and return surveys with vote totals. Now, anyone with my website URL is able to vote on the most recently published survey and see the results live!
 
 * **HTTP service using Node.js and Express** - done!
 * **Frontend served up using Express static middleware** - done!

@@ -76,3 +76,13 @@ For this section, I made my website completely functional (for a single user).
 * **Database data** - Database data is stored in localStorage. An array is created that stores each of the surveys that has been created. An object is created for each of the answers and its count. Each survey is displayed on the results page along with the count of how many times each answer was voted for.
 * **Future WebSocket** - On the about page, a setInterval function changes a message every seven seconds. It starts out as "Happy birthday to you" and adds "and you" periodically.
 * **Application's interaction logic** - When a user logs in, they are immediately taken to the create survey page. The question and answers inputed are saved in localStorage and displayed on the publish survey page when the survey is published. Before a survey is created, text appears that says, "Your published survey will show up here!" An answer can be selected and submitted on the published survey page. A count for each of the answers is stored and the count is updated when the answer is submitted. This count, along with the survey question and answers is displayed on the results page. Multiple surveys can be created and their answers stored.
+
+## Service
+
+For this deliverable I added backend endpoints that receive surveys and vote counts and return surveys with vote totals. Now, anyone with my website URL is able to vote on the most recently published survey and see the results live!
+
+* **HTTP service using Node.js and Express** - done!
+* **Frontend served up using Express static middleware** - done!
+* **Calls to third party endpoints** - A random image and quote are displayed on the about page using third party endpoints.
+* **Backend service endpoints** - Endpoints for the surveys and the results of the surveys. When someone submits an answer, that survey's results are updated.
+* **Frontend calls service endpoints** - I did this using fetch functions. There is one that gets the most recently published survey and displays it on the published survey tab. Another fetch function is used to get all the surveys and their results on display them on the results page.

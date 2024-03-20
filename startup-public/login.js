@@ -8,6 +8,18 @@ async function login () {
             'Content-type': 'application/json; charset=UTF-8',
         },
     });
-    // localStorage.setItem('userName', emailEl.value);
-    // window.location.href = 'survey.html';
+
+    if (response.ok) {
+        localStorage.setItem('userName', emailEl.value);
+        window.location.href = 'survey.html';
+    }
+    else {
+        const response = await fetch(`api/auth/create`, {
+            method: 'post',
+            body: JSON.stringify({ email: emailEl, password: password }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        });
+    }
 }

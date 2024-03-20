@@ -57,8 +57,15 @@
                       <label for="inputemail" class="col-form-label">Email</label>
                     </div>
                     <div class="col-auto">
-                      <input type="email" id="inputemail" class="form-control" placeholder="example@gmail.com" required pattern=".*@.*" aria-describedby="passwordHelpInline">
-                    </div> 
+                      <input type="email" id="inputemail" class="form-control" placeholder="example@email.com" required pattern=".*@.*" aria-describedby="passwordHelpInline">
+                    </div>
+                    
+                    <div class="col-auto">
+                      <label for="userPassword" class="col-form-label">Password</label>
+                    </div>
+                    <div class="col-auto">
+                      <input type="password" id="userPassword" class="form-control" placeholder="Password" aria-describedby="passwordHelpInline">
+                    </div>
                     <div class="col-auto">
                         <button type="submit" id="login_button" class="btn btn-light" onclick="login()">Login</button>
                     </div>

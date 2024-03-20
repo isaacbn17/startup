@@ -51,7 +51,8 @@
 
         <main>
             <h2>Welcome to Group Voting</h2>
-            <form method="get" action="survey.html">
+            <!-- Displayed when needing to log in -->
+            <form id="loginDisplay" method="get" action="survey.html">
                 <div class="row g-3 align-items-center">
                     <div class="col-auto">
                       <label for="inputemail" class="col-form-label">Email</label>
@@ -69,14 +70,18 @@
                     <div class="col-auto">
                         <button type="submit" id="login_button" class="btn btn-light" onclick="login()">Login</button>
                     </div>
+                    <!-- <div class="col-auto">
+                      <button type="submit" id="create_button" class="btn btn-light" onclick="login()">Create Account</button>
+                    </div> -->
 
                 </div>
-                <!-- <label type="text" for="Email">Email</label>
-                <input type="email" id="Email" placeholder="example@gmail.com" required pattern=".*@.*"> -->
-                <!-- <label for="InputEmail" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="InputEmail" placeholder="example@gmail.com" required pattern=".*@.*" aria-describedby="emailHelp"> -->
-                <!-- <button type="submit">Login</button> -->
             </form>
+            <!-- Displayed when logged in -->
+            <!-- <div id="surveyDisplay">
+              <div id="userName"></div>
+              <button class="btn btn-light" onclick="goToSurvey()">Make Survey</button>
+              <button class="btn btn-light" onclick="logout()">Logout</button>
+            </div> -->
         </main>
 
         <hr \>

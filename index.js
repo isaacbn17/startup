@@ -11,28 +11,39 @@
 //     console.log(`Unable to connect to database with ${url} because ${ex.message}`);
 //     process.exit(1);
 //   });
-
 const express = require('express');
 const app = express();
+const cookieParser = require('cookie-parser');
+const bcrypt =  require('bcrypt');
+const DB = require('/database.js');
+
+const authCookieName = 'token';
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
 app.use(express.json());
 
+app.use(cookieParser());
+
 app.use(express.static('startup-public'));
 
-const apiRouter = express.Router();
+app.set('trust proxy', true);
+
+var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
+// Creates a new survey
 apiRouter.post('/survey', (req, res) => {
     updateSurveyData(req.body);
     res.send(surveyData);
 });
 
+// Returns published survey
 apiRouter.get('/publishedSurvey', (req, res) => {
     res.send(surveyData);
 });
 
+// Returns surveys with results
 apiRouter.get('/results', (_req, res) => {
     res.send(surveyData);
   });

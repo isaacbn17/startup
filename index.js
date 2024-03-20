@@ -1,16 +1,3 @@
-// const { MongoClient } = require('mongodb')
-// const config = require('./dbConfig.json');
-
-// const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
-// const client = new MongoClient(url);
-
-// (async function testConnection() {
-//     await client.connect();
-//     await db.command({ ping: 1 });
-//   })().catch((ex) => {
-//     console.log(`Unable to connect to database with ${url} because ${ex.message}`);
-//     process.exit(1);
-//   });
 const express = require('express');
 const app = express();
 const cookieParser = require('cookie-parser');
@@ -31,6 +18,22 @@ app.set('trust proxy', true);
 
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
+
+// Create authentication token for a new user
+apiRouter.post('/auth/create', async (req, res) => {
+    if (await DB.getUser(req.body.email)) {
+        res.status(409).send({ msg: 'User already exists' });
+    } else {
+        const user = await DB.createUser(req.body.email);
+
+        setAuthCookie(res, user.token);
+        res.send({
+            id: user._id,
+        });
+    }
+});
+
+
 
 // Creates a new survey
 apiRouter.post('/survey', (req, res) => {

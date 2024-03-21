@@ -3,12 +3,12 @@ document.addEventListener('DOMContentLoaded', async function getSurveyData() {
 
     try {
         const response = await fetch('/api/publishedSurvey');
-        const surveys = await response.json();
-        console.log(surveys);
-        let lengthSurveys = surveys.length;
+        survey = await response.json();
+        // console.log(surveys);
+        // let lengthSurveys = surveys.length;
         // get most recent survey
-        survey = surveys[lengthSurveys-1];
-        console.log(survey)
+        // survey = surveys[lengthSurveys-1];
+        console.log(survey);
     }
     catch (e) {
         console.log("It caught a problem.")

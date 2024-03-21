@@ -43,10 +43,13 @@ function postSurvey(survey) {
     surveyCollection.insertOne(survey);
 }
 
-function getSurvey() {
-    const query = { survey };
-    const cursor = surveyCollection.find(query);
-    return cursor.toArray();
+async function getMostRecentSurvey() {
+    // const query = { survey };
+    const cursor = surveyCollection.find().sort({ _id: -1 }).limit(1);
+    console.log(cursor);
+    const survey = await cursor.toArray();
+    console.log(survey);
+    return survey[0];
 }
 
 module.exports = {
@@ -54,5 +57,5 @@ module.exports = {
     getUserByToken,
     createUser,
     postSurvey,
-    getSurvey,
+    getMostRecentSurvey,
 };

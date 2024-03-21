@@ -92,24 +92,25 @@ secureApiRouter.post('/survey', async (req, res) => {
 
 // Returns published survey
 secureApiRouter.get('/publishedSurvey', async (req, res) => {
-    const survey = await DB.getSurvey();
+    const survey = await DB.getMostRecentSurvey();
     res.send(survey);
 })
 
+// Old version of getting a survey
 // apiRouter.get('/publishedSurvey', (req, res) => {
 //     res.send(surveyData);
 // });
 
 // Returns surveys with results
-apiRouter.get('/results', (_req, res) => {
-    res.send(surveyData);
-  });
+// apiRouter.get('/results', (_req, res) => {
+//     res.send(surveyData);
+//   });
 
-apiRouter.post('/results', (req, res) => {
-    editSurveyData(req.body);
-    console.log(surveyData);
-    res.send(surveyData);
-});
+// apiRouter.post('/results', (req, res) => {
+//     editSurveyData(req.body);
+//     console.log(surveyData);
+//     res.send(surveyData);
+// });
 
 // let surveyData = [];
 // function updateSurveyData(newSurvey) {

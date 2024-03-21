@@ -83,6 +83,12 @@ img {
     margin: 1;
 }
 
+#userName {
+    font-size: 25px;
+    text-align: center;
+    padding: 0.5em;
+}
+
 footer {
     flex: 0 40px;
     position: fixed;

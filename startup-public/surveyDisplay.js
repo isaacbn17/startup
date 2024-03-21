@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async function getSurveyData() {
     else {
         messageContainer = document.getElementById('no_survey');
         const message = document.createElement('h2');
-        message.textContent = 'Your published survey will show up here!'
+        message.textContent = 'Published surveys will show up here!'
         messageContainer.appendChild(message);
     }
 });

@@ -68,10 +68,10 @@
                       <input type="password" id="userPassword" class="form-control" placeholder="Password" aria-describedby="passwordHelpInline">
                     </div>
                     <div class="col-auto">
-                        <button type="submit" id="login_button" class="btn btn-light" onclick="login()">Login</button>
+                        <button type="submit" id="login_button" class="btn btn-light" onclick="loginUser()">Login</button>
                     </div>
                     <div class="col-auto">
-                      <button type="submit" id="create_button" class="btn btn-light" onclick="login()">Sign up</button>
+                      <button type="submit" id="create_button" class="btn btn-light" onclick="signUp()">Sign up</button>
                     </div>
                 </div>
             <!-- </form> -->
@@ -84,6 +84,8 @@
             <button class="btn btn-light" onclick="goToPublishedSurvey()">Published Survey</button>
             <button class="btn btn-light" onclick="logout()">Logout</button>
           </div>
+
+          <div id="errorMessage"></div>
         </main>
 
         <hr \>

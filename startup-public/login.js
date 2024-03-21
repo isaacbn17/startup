@@ -18,11 +18,18 @@ function setDisplay(controlID, display) {
     }
 }
 
-async function login() {
-    console.log('Arrived at login function')
+async function loginUser() {
+    login(`/api/auth/login`);
+}
+
+async function signUp() {
+    login(`/api/auth/create`);
+}
+
+async function login(endpoint) {
     const email = document.querySelector('#inputemail').value;
     const password = document.querySelector('#userPassword').value;
-    const response = await fetch(`api/auth/login`, {
+    const response = await fetch(endpoint, {
         method: 'post',
         body: JSON.stringify({ email: email, password: password }),
         headers: {
@@ -31,19 +38,14 @@ async function login() {
     });
 
     if (response.ok) {
-        console.log("Response was ok")
         localStorage.setItem('userName', email);
         window.location.href = 'survey.html';
     }
     else {
-        console.log("Response was not ok")
-        const response = await fetch(`api/auth/create`, {
-            method: 'post',
-            body: JSON.stringify({ email: email, password: password }),
-            headers: {
-                'Content-type': 'application/json; charset=UTF-8',
-            },
-        });
+        const errorMessage = await response.json();
+        console.log("Error: ");
+        console.log(errorMessage);
+        document.querySelector('#errorMessage').textContent = errorMessage;
     }
 }
 

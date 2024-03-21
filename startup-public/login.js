@@ -47,6 +47,13 @@ async function login() {
     }
 }
 
+async function logout() {
+    localStorage.removeItem('userName');
+    fetch(`api/auth/logout`, {
+        method: 'delete',
+    }).then(() => (window.location.href = '/'));
+}
+
 function goToSurvey() {
     window.location.href = 'survey.html';
 }

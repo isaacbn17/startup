@@ -29,23 +29,29 @@ async function signUp() {
 async function login(endpoint) {
     const email = document.querySelector('#inputemail').value;
     const password = document.querySelector('#userPassword').value;
-    const response = await fetch(endpoint, {
-        method: 'post',
-        body: JSON.stringify({ email: email, password: password }),
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-        },
-    });
-
-    if (response.ok) {
-        localStorage.setItem('userName', email);
-        window.location.href = 'survey.html';
+    if (email && password) {
+        console.log("Email and password aren't null.");
+        const response = await fetch(endpoint, {
+            method: 'post',
+            body: JSON.stringify({ email: email, password: password }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        });
+    
+        if (response.ok) {
+            localStorage.setItem('userName', email);
+            window.location.href = 'survey.html';
+        }
+        else {
+            const errorMessage = await response.json();
+            const errorText = JSON.stringify(errorMessage);
+            const errorMsgText = errorMessage.msg;
+            document.querySelector('#errorMessage').textContent = errorMsgText;
+        }
     }
     else {
-        const errorMessage = await response.json();
-        const errorText = JSON.stringify(errorMessage);
-        const errorMsgText = errorMessage.msg;
-        document.querySelector('#errorMessage').textContent = errorMsgText;
+        document.querySelector('#errorMessage').textContent = 'Email and password are required.'
     }
 }
 

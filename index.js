@@ -102,6 +102,10 @@ secureApiRouter.get('/publishedSurvey', async (req, res) => {
 // });
 
 // Returns surveys with results
+secureApiRouter.get('/results', async (_req, res) => {
+    const surveys = await DB.getAllSurveys();
+    res.send(surveys);
+})
 // apiRouter.get('/results', (_req, res) => {
 //     res.send(surveyData);
 //   });

@@ -44,12 +44,15 @@ function postSurvey(survey) {
 }
 
 async function getMostRecentSurvey() {
-    // const query = { survey };
     const cursor = surveyCollection.find().sort({ _id: -1 }).limit(1);
-    console.log(cursor);
     const survey = await cursor.toArray();
-    console.log(survey);
     return survey[0];
+}
+
+async function getAllSurveys() {
+    const cursor = surveyCollection.find().sort({ _id: -1});
+    const surveys = await cursor.toArray();
+    return surveys;
 }
 
 module.exports = {
@@ -58,4 +61,5 @@ module.exports = {
     createUser,
     postSurvey,
     getMostRecentSurvey,
+    getAllSurveys,
 };

@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', async function getSurveyData() {
         // get most recent survey
         // survey = surveys[lengthSurveys-1];
         console.log(survey);
+        console.log(survey._id);
     }
     catch (e) {
         console.log("It caught a problem.")

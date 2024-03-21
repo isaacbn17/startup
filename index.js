@@ -106,6 +106,15 @@ secureApiRouter.get('/results', async (_req, res) => {
     const surveys = await DB.getAllSurveys();
     res.send(surveys);
 })
+
+// Returns updated survey results
+secureApiRouter.put('/results', async (req, res) => {
+    const survey = req.body;
+    const surveyID = survey._id;
+
+    const updatedSurvey = await DB.updateResultsCount(surveyID, survey);
+    res.send(updatedSurvey);
+})
 // apiRouter.get('/results', (_req, res) => {
 //     res.send(surveyData);
 //   });

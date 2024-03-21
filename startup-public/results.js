@@ -3,10 +3,10 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     try {
         let allSurveys = []
-        const response = await fetch('/api/results');
-        surveyData = await response.json();
+        // const response = await fetch('/api/results');
+        // surveyData = await response.json();
         if (selectedAnswer) {
-            [count, surveys] = updateCount(selectedAnswer, surveyData);
+            [count, surveys] = updateCount(selectedAnswer);
             console.log("The updated count is:");
             console.log(count)
             localStorage.removeItem('selectedAnswer');
@@ -37,11 +37,27 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 });
 
-function updateCount(answer, surveys) {
+async function updateCount(answer) {
     console.log("Participant's answer: ")
     console.log(answer);
+    const response = await fetch('/api/publishedSurvey');
+    const survey = await response.json();
+
+    survey.resultsCount[answer]++;
+    const surveyID = survey._id;
     // Change the count for the most recently published survey
-    surveyData[surveys.length-1].resultsCount[answer]++;
+    try {
+        const response = await fetch('/api/results', {
+            method: 'PUT',
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify(survey),
+        });
+        allSurveys = await response.json();
+    }
+    catch (e) {
+        console.error('Something went wrong\n' + e);
+    }
+    // surveyData[surveys.length-1].resultsCount[answer]++;
     return [surveyData[surveys.length-1].resultsCount, surveyData];
 };
 

@@ -55,6 +55,15 @@ async function getAllSurveys() {
     return surveys;
 }
 
+async function updateResultsCount(surveyID, survey) {
+    const filter = { _id: surveyID }
+    const updateOperation = {
+        $set: survey
+    };
+    const result = await surveyCollection.updateOne(filter, updateOperation);
+    return result; 
+}   
+
 module.exports = {
     getUser,
     getUserByToken,
@@ -62,4 +71,5 @@ module.exports = {
     postSurvey,
     getMostRecentSurvey,
     getAllSurveys,
+    updateResultsCount
 };

@@ -43,9 +43,9 @@ async function login(endpoint) {
     }
     else {
         const errorMessage = await response.json();
-        console.log("Error: ");
-        console.log(errorMessage);
-        document.querySelector('#errorMessage').textContent = errorMessage;
+        const errorText = JSON.stringify(errorMessage);
+        const errorMsgText = errorMessage.msg;
+        document.querySelector('#errorMessage').textContent = errorMsgText;
     }
 }
 

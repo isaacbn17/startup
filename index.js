@@ -43,7 +43,7 @@ apiRouter.post('/auth/login', async (req, res) => {
             return;
         }
     }
-    res.status(401).send({ msg: 'Unauthorized' });
+    res.status(401).send({ msg: 'Incorrect Password' });
 });
 
 apiRouter.delete('/auth/logout', (_req, res) => {
@@ -71,7 +71,7 @@ secureApiRouter.use(async (req, res, next) => {
     if (user) {
         next();
     } else {
-        res.status(401).send({ msg: 'Unauthorized' });
+        res.status(401).send({ msg: 'Incorrect Password' });
     }
 });
 

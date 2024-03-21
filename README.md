@@ -86,3 +86,14 @@ For this deliverable I added backend endpoints that receive surveys and vote cou
 * **Calls to third party endpoints** - A random image and quote are displayed on the about page using third party endpoints.
 * **Backend service endpoints** - Endpoints for the surveys and the results of the surveys. When someone submits an answer, that survey's results are updated.
 * **Frontend calls service endpoints** - I did this using fetch functions. There is one that gets the most recently published survey and displays it on the published survey tab. Another fetch function is used to get all the surveys and their results on display them on the results page.
+* 
+## Login
+
+Somehow, I got it done. 
+
+Application authentication and authorization
+* **Supports new user registration** -
+* **Supports existing user authentication** - 
+* **Stores application data in MongoDB** -
+* **Stores and retrieves credentials in MongoDB** -
+* **Restricts application functionality based upon authentication** -

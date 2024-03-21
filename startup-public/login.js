@@ -10,7 +10,8 @@
     }
 })();
 
-async function login () {
+async function login() {
+    console.log('Arrived at login function')
     const email = document.querySelector('#inputemail').value;
     const password = document.querySelector('#userPassword').value;
     const response = await fetch(`api/auth/login`, {
@@ -22,10 +23,12 @@ async function login () {
     });
 
     if (response.ok) {
+        console.log("Response was ok")
         localStorage.setItem('userName', email.value);
-        window.location.href = 'survey.html';
+        // window.location.href = 'survey.html';
     }
     else {
+        console.log("In else of login")
         const response = await fetch(`api/auth/create`, {
             method: 'post',
             body: JSON.stringify({ email: email, password: password }),

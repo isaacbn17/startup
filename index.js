@@ -21,16 +21,16 @@ app.use(`/api`, apiRouter);
 
 // Create authentication token for a new user
 apiRouter.post('/auth/create', async (req, res) => {
-    if (await DB.getUser(req.body.email)) {
-        res.status(409).send({ msg: 'User already exists' });
-    } else {
-        const user = await DB.createUser(req.body.email, req.body.password);
+    // if (await DB.getUser(req.body.email)) {
+    //     res.status(409).send({ msg: 'User already exists' });
+    // } else {
+    const user = await DB.createUser(req.body.email, req.body.password);
 
-        setAuthCookie(res, user.token);
-        res.send({
-            id: user._id,
-        });
-    }
+    setAuthCookie(res, user.token);
+    res.send({
+        id: user._id,
+    });
+    // }
 });
 
 // Gets authentication token for the user
@@ -97,14 +97,6 @@ apiRouter.post('/results', (req, res) => {
     res.send(surveyData);
 });
 
-app.use((_req, res) => {
-    res.sendFile('index.html', { root: 'startup-public'});
-});
-
-app.listen(port, () => {
-    console.log(`Listening on port ${port}`);
-});
-
 let surveyData = [];
 function updateSurveyData(newSurvey) {
     surveyData.push(newSurvey);
@@ -114,3 +106,26 @@ function editSurveyData(surveys) {
     surveyData.pop();
     surveyData = surveys;
 }
+
+// Default error handler
+app.use(function (err, req, res, next) {
+    res.status(500).send({ type: err.name, message: err.message });
+  });
+  
+
+app.use((_req, res) => {
+    res.sendFile('index.html', { root: 'startup-public'});
+});
+
+// sets cookie
+function setAuthCookie(res, authToken) {
+    res.cookie(authCookieName, authToken, {
+      secure: true,
+      httpOnly: true,
+      sameSite: 'strict',
+    });
+  }
+
+app.listen(port, () => {
+    console.log(`Listening on port ${port}`);
+});

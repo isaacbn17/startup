@@ -62,6 +62,7 @@ apiRouter.get('/user/:email', async (req, res) => {
     res.status(404).send({ msg: 'Unkown' });
 });
 
+// secureApiRouter verifies endpoint credentials
 var secureApiRouter = express.Router();
 apiRouter.use(secureApiRouter);
 
@@ -76,15 +77,28 @@ secureApiRouter.use(async (req, res, next) => {
 });
 
 // Creates a new survey
-apiRouter.post('/survey', (req, res) => {
-    updateSurveyData(req.body);
-    res.send(surveyData);
+secureApiRouter.post('/survey', async (req, res) => {
+    const survey = { ...req.body };
+    await DB.postSurvey(survey);
+    // const surveyData = await DB.getSurveyData();
+    res.send(survey);
 });
 
+// Old version of creating a survey
+// apiRouter.post('/survey', (req, res) => {
+//     updateSurveyData(req.body);
+//     res.send(surveyData);
+// });
+
 // Returns published survey
-apiRouter.get('/publishedSurvey', (req, res) => {
-    res.send(surveyData);
-});
+secureApiRouter.get('/publishedSurvey', async (req, res) => {
+    const survey = await DB.getSurvey();
+    res.send(survey);
+})
+
+// apiRouter.get('/publishedSurvey', (req, res) => {
+//     res.send(surveyData);
+// });
 
 // Returns surveys with results
 apiRouter.get('/results', (_req, res) => {
@@ -97,15 +111,16 @@ apiRouter.post('/results', (req, res) => {
     res.send(surveyData);
 });
 
-let surveyData = [];
-function updateSurveyData(newSurvey) {
-    surveyData.push(newSurvey);
-};
+// let surveyData = [];
+// function updateSurveyData(newSurvey) {
+//     surveyData.push(newSurvey);
+// };
 
-function editSurveyData(surveys) {
-    surveyData.pop();
-    surveyData = surveys;
-}
+// function editSurveyData(surveys) {
+//     surveyData.pop();
+//     surveyData = surveys;
+// }
+
 
 // Default error handler (grabbed from simon)
 app.use(function (err, req, res, next) {

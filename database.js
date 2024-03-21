@@ -7,6 +7,7 @@ const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostna
 const client = new MongoClient(url);
 const db = client.db('startup');
 const userCollection = db.collection('user');
+const surveyCollection = db.collection('survey');
 
 
 (async function testConnection() {
@@ -38,8 +39,20 @@ async function createUser(email, password) {
     return user;
 }
 
+function postSurvey(survey) {
+    surveyCollection.insertOne(survey);
+}
+
+function getSurvey() {
+    const query = { survey };
+    const cursor = surveyCollection.find(query);
+    return cursor.toArray();
+}
+
 module.exports = {
     getUser,
     getUserByToken,
     createUser,
+    postSurvey,
+    getSurvey,
 };

@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         let allSurveys = []
         // If there's an answer chosen, update the survey on MongoDB
         if (selectedAnswer) {
+            localStorage.removeItem('selectedAnswer');
             updateCount(selectedAnswer);
             const response = await fetch('/api/results');
             allSurveys = await response.json()
@@ -44,9 +45,9 @@ function displayResults(surveyData) {
     const resultsContainer = document.getElementById('resultsContainer');
 
     surveyData.forEach(survey => {
-        console.log("This survey is: ");
-        console.log(survey.question);
-        console.log(survey.resultsCount);
+        // console.log("This survey is: ");
+        // console.log(survey.question);
+        // console.log(survey.resultsCount);
 
         const tableRow = document.createElement('tr');
 

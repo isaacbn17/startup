@@ -84,22 +84,11 @@ secureApiRouter.post('/survey', async (req, res) => {
     res.send(survey);
 });
 
-// Old version of creating a survey
-// apiRouter.post('/survey', (req, res) => {
-//     updateSurveyData(req.body);
-//     res.send(surveyData);
-// });
-
 // Returns published survey
 secureApiRouter.get('/publishedSurvey', async (req, res) => {
     const survey = await DB.getMostRecentSurvey();
     res.send(survey);
 })
-
-// Old version of getting a survey
-// apiRouter.get('/publishedSurvey', (req, res) => {
-//     res.send(surveyData);
-// });
 
 // Returns surveys with results
 secureApiRouter.get('/results', async (_req, res) => {
@@ -109,32 +98,19 @@ secureApiRouter.get('/results', async (_req, res) => {
 
 // Returns updated survey results
 secureApiRouter.put('/results', async (req, res) => {
-    const survey = req.body;
-    const surveyID = survey._id;
+    try {
+        const { answer } = req.body;
+        const survey = await DB.getMostRecentSurvey();
+        survey.resultsCount[answer]++;
 
-    const updatedSurvey = await DB.updateResultsCount(surveyID, survey);
-    res.send(updatedSurvey);
+        await DB.updateResultsCount(survey._id, survey);
+        res.status(200).send({ message: 'Results count updated successfully' });
+    } catch (e) {
+        console.error('Error updating results count:', e);
+        res.status(500).send({ error: 'Failed to update results count' });
+    }
+
 })
-// apiRouter.get('/results', (_req, res) => {
-//     res.send(surveyData);
-//   });
-
-// apiRouter.post('/results', (req, res) => {
-//     editSurveyData(req.body);
-//     console.log(surveyData);
-//     res.send(surveyData);
-// });
-
-// let surveyData = [];
-// function updateSurveyData(newSurvey) {
-//     surveyData.push(newSurvey);
-// };
-
-// function editSurveyData(surveys) {
-//     surveyData.pop();
-//     surveyData = surveys;
-// }
-
 
 // Default error handler (grabbed from simon)
 app.use(function (err, req, res, next) {

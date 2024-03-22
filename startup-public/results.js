@@ -3,62 +3,41 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     try {
         let allSurveys = []
-        // const response = await fetch('/api/results');
-        // surveyData = await response.json();
+        // If there's an answer chosen, update the survey on MongoDB
         if (selectedAnswer) {
-            [count, surveys] = updateCount(selectedAnswer);
-            console.log("The updated count is:");
-            console.log(count)
-            localStorage.removeItem('selectedAnswer');
-            console.log('The surveys are: ')
-            console.log(surveys)
-            try {
-                const response = await fetch('/api/results', {
-                    method: 'POST',
-                    headers: {'content-type': 'application/json'},
-                    body: JSON.stringify(surveys),
-                });
-                allSurveys = await response.json();
-            }
-            catch (e) {
-                console.error('Something went wrong\n' + e);
-            }
+            updateCount(selectedAnswer);
+            const response = await fetch('/api/results');
+            allSurveys = await response.json()
         }
         else {
             console.log("No answer was given.");
-            allSurveys = surveyData;
+            const response = await fetch('/api/results');
+            allSurveys = await response.json()
         }
         displayResults(allSurveys);
     }
     catch (e) {
         console.error("It didn't quite work\n" + e)
-        // const surveyData = JSON.parse(localStorage.getItem('surveyData'));
     }
-
 });
 
 async function updateCount(answer) {
     console.log("Participant's answer: ")
     console.log(answer);
-    const response = await fetch('/api/publishedSurvey');
-    const survey = await response.json();
-
-    survey.resultsCount[answer]++;
-    const surveyID = survey._id;
     // Change the count for the most recently published survey
     try {
+        console.log('In try block')
         const response = await fetch('/api/results', {
             method: 'PUT',
             headers: {'content-type': 'application/json'},
-            body: JSON.stringify(survey),
+            body: JSON.stringify({ answer: answer }),
+            
         });
-        allSurveys = await response.json();
     }
     catch (e) {
         console.error('Something went wrong\n' + e);
     }
-    // surveyData[surveys.length-1].resultsCount[answer]++;
-    return [surveyData[surveys.length-1].resultsCount, surveyData];
+    return 0;
 };
 
 function displayResults(surveyData) {

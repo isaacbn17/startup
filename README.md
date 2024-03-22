@@ -86,14 +86,14 @@ For this deliverable I added backend endpoints that receive surveys and vote cou
 * **Calls to third party endpoints** - A random image and quote are displayed on the about page using third party endpoints.
 * **Backend service endpoints** - Endpoints for the surveys and the results of the surveys. When someone submits an answer, that survey's results are updated.
 * **Frontend calls service endpoints** - I did this using fetch functions. There is one that gets the most recently published survey and displays it on the published survey tab. Another fetch function is used to get all the surveys and their results on display them on the results page.
-* 
+
 ## Login
 
-Somehow, I got it done. 
+I got it done! My website now allows users to create an account and login. They're unable to vote or make a survey until they have done this. Surveys and vote counts are stored, updated, and retrieved from MongoDB.
 
 Application authentication and authorization
-* **Supports new user registration** -
-* **Supports existing user authentication** - 
-* **Stores application data in MongoDB** -
-* **Stores and retrieves credentials in MongoDB** -
-* **Restricts application functionality based upon authentication** -
+* **Supports new user registration** - Yep! Users can create an account. Multiple accounts can't have the same email.
+* **Supports existing user authentication** - Yes! Existing users can login with their email and password.
+* **Stores application data in MongoDB** - The surveys are saved in MongoDB. When someone votes, the results are updated in MongoDB and retrieved at the results page.
+* **Stores and retrieves credentials in MongoDB** - Done!  Emails and hashed passwords are saved in MongoDB. They are retrieved when someone logs in. The user is displayed on the Create Survey page.
+* **Restricts application functionality based upon authentication** - Yes. No one can create a survey or vote on the current survey until they have logged in or signed up.

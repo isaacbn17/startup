@@ -66,8 +66,6 @@ function displaySurvey(question, answers) {
                 answer: text.textContent,
             };
             localStorage.setItem('vote', JSON.stringify(userVote));
-            console.log('Set websocket userVote');
-            console.log(localStorage.getItem('vote'));
         })
     });
 

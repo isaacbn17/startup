@@ -70,6 +70,9 @@ function displaySurvey(question, answers) {
     submit_button.type = 'submit';
     submit_button.textContent = 'Submit';
     submit_button.addEventListener('click', () => {
+        const username = localStorage.getItem('userName') ?? 'Unkown User';
+        const answer = text.textContent;
+        socket.send(`{"name":"${username}", "msg":"${answer}"}`)
         window.location.href = 'results.html';
     });
 

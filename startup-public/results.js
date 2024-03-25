@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         let allSurveys = []
         // If there's an answer chosen, update the survey on MongoDB
         if (selectedAnswer) {
-          const userVote = localStorage.getItem(vote);
+          const userVote = localStorage.getItem('vote');
           socket.send(userVote);
           localStorage.removeItem('selectedAnswer');
           updateCount(selectedAnswer);

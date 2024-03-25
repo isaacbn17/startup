@@ -1,3 +1,23 @@
+const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+
+socket.onopen = (event) => {
+  displayMsg('system', 'Websocket', 'connected');
+};
+socket.onclose = (event) => {
+  displayMsg('system', 'Websocket', 'disconnected');
+};
+socket.onmessage = async (event) => {
+  const msg = JSON.parse(await event.data.text());
+  displayMsg('user', msg.name, `voted ${msg.answer}`);
+};
+  
+
+function displayMsg(cls, from, msg) {
+  const notificationText = document.querySelector('#surveyNotifications');
+  notificationText.innerHTML = `<div class="event"><p class=${cls}>${from} ${msg}</p></div>` + notificationText.innerHTML;
+}
+
 document.addEventListener('DOMContentLoaded', async function () {
     const selectedAnswer = JSON.parse(localStorage.getItem('selectedAnswer'));
 
@@ -5,10 +25,12 @@ document.addEventListener('DOMContentLoaded', async function () {
         let allSurveys = []
         // If there's an answer chosen, update the survey on MongoDB
         if (selectedAnswer) {
-            localStorage.removeItem('selectedAnswer');
-            updateCount(selectedAnswer);
-            const response = await fetch('/api/results');
-            allSurveys = await response.json()
+          const userVote = localStorage.getItem(vote);
+          socket.send(userVote);
+          localStorage.removeItem('selectedAnswer');
+          updateCount(selectedAnswer);
+          const response = await fetch('/api/results');
+          allSurveys = await response.json()
         }
         else {
             console.log("No answer was given.");
@@ -65,35 +87,3 @@ function displayResults(surveyData) {
         resultsContainer.appendChild(tableRow);
     });
 };
-
-function configureWebSocket() {
-    const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
-    const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
-    socket.onopen = (event) => {
-      displayMsg('system', 'Websocket', 'connected');
-    };
-    socket.onclose = (event) => {
-      displayMsg('system', 'Websocket', 'disconnected');
-    };
-    socket.onmessage = async (event) => {
-      const msg = JSON.parse(await event.data.text());
-      displayMsg('user', msg.name, `voted ${msg.answer}`);
-    };
-  }
-
-  function displayMsg(cls, from, msg) {
-    const notificationText = document.querySelector('#surveyNotifications');
-    notificationText.innerHTML =
-    `<div class="event"><p class=${cls}>${from} ${msg}</p></div>` + notificationText.innerHTML;
-  }
-
-  function broadcastEvent(from, type, value) {
-    const event = {
-      from: from,
-      type: type,
-      value: value,
-    };
-    socket.send(JSON.stringify(event));
-  }
-
-configureWebSocket();

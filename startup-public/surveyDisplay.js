@@ -63,16 +63,20 @@ function displaySurvey(question, answers) {
         })
     });
 
-
-
     const submit_button = document.createElement('button');
     submit_button.classList.add('btn', 'btn-light');
     submit_button.type = 'submit';
     submit_button.textContent = 'Submit';
+    // When someone votes, the vote is sent to the websocket so it can be displayed on the results page
     submit_button.addEventListener('click', () => {
         const username = localStorage.getItem('userName') ?? 'Unkown User';
         const answer = text.textContent;
-        socket.send(`{"name":"${username}", "answer":"${answer}"}`)
+        const userVote = {
+            name: username,
+            answer: answer,
+        };
+        localStorage.setItem('vote', JSON.stringify(userVote));
+        // socket.send(`{"name":"${username}", "answer":"${answer}"}`)
         window.location.href = 'results.html';
     });
 

@@ -86,9 +86,10 @@ function configureWebSocket() {
   }
 
   function displayMsg(cls, from, msg) {
-    const chatText = document.querySelector('#player-messages');
-    chatText.innerHTML =
-      `<div class="event"><span class="${cls}-event">${from}</span> ${msg}</div>` + chatText.innerHTML;
+    const notificationText = document.querySelector('#surveyNotifications');
+    notificationText.innerHTML =
+    `<div class="event"><p>${from} ${msg}</p></div>` + notificationText.innerHTML;
+    //   `<div class="event"><span class="${cls}-event">${from}</span> ${msg}</div>` + notificationText.innerHTML;
   }
 
   function broadcastEvent(from, type, value) {

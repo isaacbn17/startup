@@ -68,28 +68,23 @@ function displayResults(surveyData) {
 
 function configureWebSocket() {
     const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
-    socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+    const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
     socket.onopen = (event) => {
-      displayMsg('system', 'game', 'connected');
+      displayMsg('system', 'Websocket', 'connected');
     };
     socket.onclose = (event) => {
-      displayMsg('system', 'game', 'disconnected');
+      displayMsg('system', 'Websocket', 'disconnected');
     };
     socket.onmessage = async (event) => {
       const msg = JSON.parse(await event.data.text());
-      if (msg.type === GameEndEvent) {
-        displayMsg('player', msg.from, `scored ${msg.value.score}`);
-      } else if (msg.type === GameStartEvent) {
-        displayMsg('player', msg.from, `started a new game`);
-      }
+      displayMsg('user', msg.name, `voted ${msg.answer}`);
     };
   }
 
   function displayMsg(cls, from, msg) {
     const notificationText = document.querySelector('#surveyNotifications');
     notificationText.innerHTML =
-    `<div class="event"><p>${from} ${msg}</p></div>` + notificationText.innerHTML;
-    //   `<div class="event"><span class="${cls}-event">${from}</span> ${msg}</div>` + notificationText.innerHTML;
+    `<div class="event"><p class=${cls}>${from} ${msg}</p></div>` + notificationText.innerHTML;
   }
 
   function broadcastEvent(from, type, value) {
@@ -100,3 +95,5 @@ function configureWebSocket() {
     };
     socket.send(JSON.stringify(event));
   }
+
+configureWebSocket();

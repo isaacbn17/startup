@@ -12,13 +12,12 @@ socket.onmessage = async (event) => {
   //const msg = JSON.parse(await event.data.text());
   const data = JSON.parse(await event.data.text());
   console.log(data);
-  updateCount(data.answer);
   const response = await fetch('/api/results');
   allSurveys = await response.json()
   displayResults(allSurveys);
-  displayMsg('user', msg.name, `voted ${msg.answer}`);
+  displayMsg('user', data.name, `voted ${data.answer}`);
 };
-  
+
 
 function displayMsg(cls, from, msg) {
   const notificationText = document.querySelector('#surveyNotifications');
@@ -74,6 +73,7 @@ async function updateCount(answer) {
 
 function displayResults(surveyData) {
     const resultsContainer = document.getElementById('resultsContainer');
+    resultsContainer.textContent = "";
 
     surveyData.forEach(survey => {
         // console.log("This survey is: ");

@@ -3,12 +3,19 @@ const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
 
 socket.onopen = (event) => {
   displayMsg('system', 'Websocket', 'connected');
+  myLittleFriendHere();
 };
 socket.onclose = (event) => {
   displayMsg('system', 'Websocket', 'disconnected');
 };
 socket.onmessage = async (event) => {
-  const msg = JSON.parse(await event.data.text());
+  //const msg = JSON.parse(await event.data.text());
+  const data = JSON.parse(await event.data.text());
+  console.log(data);
+  updateCount(data.answer);
+  const response = await fetch('/api/results');
+  allSurveys = await response.json()
+  displayResults(allSurveys);
   displayMsg('user', msg.name, `voted ${msg.answer}`);
 };
   
@@ -18,7 +25,8 @@ function displayMsg(cls, from, msg) {
   notificationText.innerHTML = `<div class="event"><p class=${cls}>${from} ${msg}</p></div>` + notificationText.innerHTML;
 }
 
-document.addEventListener('DOMContentLoaded', async function () {
+//document.addEventListener('DOMContentLoaded', async function () {
+async function myLittleFriendHere() {
     const selectedAnswer = JSON.parse(localStorage.getItem('selectedAnswer'));
 
     try {
@@ -42,7 +50,8 @@ document.addEventListener('DOMContentLoaded', async function () {
     catch (e) {
         console.error("It didn't quite work\n" + e)
     }
-});
+}
+//});
 
 async function updateCount(answer) {
     console.log("Participant's answer: ")

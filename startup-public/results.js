@@ -21,7 +21,7 @@ socket.onmessage = async (event) => {
 
 function displayMsg(cls, from, msg) {
   const notificationText = document.querySelector('#surveyNotifications');
-  notificationText.innerHTML = `<div class="event"><p class=${cls}>${from} ${msg}</p></div>` + notificationText.innerHTML;
+  notificationText.innerHTML = `<div class="websocketEvent"><p class=websocket>${from} ${msg}</p></div>` + notificationText.innerHTML;
 }
 
 //document.addEventListener('DOMContentLoaded', async function () {

@@ -93,6 +93,13 @@ img {
     padding: 0.5em;
 }
 
+div.websocketEvent {
+    font-size: 15px;
+    text-align: left;
+    justify-content: left;
+    display: flex; 
+}
+
 footer {
     flex: 0 40px;
     position: fixed;

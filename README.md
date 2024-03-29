@@ -104,4 +104,4 @@ When on the results page, a notification is sent via websocket when another user
 * **Backend listens for WebSocket connection** - Done.
 * **Frontend makes WebSocket connection** - Done.
 * **Data sent over WebSocket connection** - Done.
-* **WebSocket data displayed in the application interface** - A user is notified of another vote and the update vote count is displayed in the table.
+* **WebSocket data displayed in the application interface** - Users are notified of someone voting and the new vote tally is displayed in the table.

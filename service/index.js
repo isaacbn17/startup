@@ -13,7 +13,7 @@ app.use(express.json());
 
 app.use(cookieParser());
 
-app.use(express.static('startup-public'));
+app.use(express.static('startup'));
 
 app.set('trust proxy', true);
 
@@ -119,7 +119,7 @@ app.use(function (err, req, res, next) {
   });
   
 app.use((_req, res) => {
-    res.sendFile('index.html', { root: 'startup-public'});
+    res.sendFile('index.html', { root: 'C:/Users/ibneu/Documents/cs/cs260/startup'});
 });
 
 // sets cookie

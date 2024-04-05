@@ -1,8 +1,8 @@
 import React from 'react';
 
-export function createSurvey() {
+export function CreateSurvey() {
     return (
-        <main className='bg-success' style={{ "--bs-bg-opacity": 0.5 }}>
+        <main>
             <div>Survey creation displayed here</div>
         </main>
     )

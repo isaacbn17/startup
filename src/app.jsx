@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { Login } from './login/login';
-import { createSurvey } from './survey/survey';
-import { publishedSurvey } from './publishedSurvey/publishedSurvey';
+import { CreateSurvey } from './survey/survey';
+import { PublishedSurvey } from './publishedSurvey/publishedSurvey';
 import { Results } from './results/results';
 import { About } from './about/about';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -22,19 +22,19 @@ export default function App() {
                         <div className="collapse navbar-collapse" id="navbarNav">
                             <ul className="navbar-nav">
                             <li className="nav-item">
-                                <NavLink className="nav-link" to="index.html">Login</NavLink>
+                                <NavLink className="nav-link" to="">Login</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link" aria-current="page" to="survey.html">Create Survey</NavLink>
+                                <NavLink className="nav-link" aria-current="page" to="survey">Create Survey</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link" to="publishedSurvey.html">Published Survey</NavLink>
+                                <NavLink className="nav-link" to="publishedSurvey">Published Survey</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link" to="results.html">Results</NavLink>
+                                <NavLink className="nav-link" to="results">Results</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link" to="about.html">About</NavLink>
+                                <NavLink className="nav-link" to="about">About</NavLink>
                             </li>
                             </ul>
                         </div>
@@ -44,10 +44,10 @@ export default function App() {
 
             <Routes>
                 <Route path='/' element={<Login />} exact />
-                <Route path='/survey' element={<createSurvey />} />
-                <Route path='/publishedSurvey' element={<publishedSurvey />}/>
+                <Route path='/survey' element={<CreateSurvey />} />
+                <Route path='/publishedSurvey' element={<PublishedSurvey />}/>
                 <Route path='/results' element={<Results />}/>
-                <Route path='/about' element={<About />}/>
+                <Route path='/about' element={<About />} />
                 <Route path='*' element={<NotFound />}/>
             </Routes>
 
@@ -63,7 +63,7 @@ export default function App() {
 function NotFound() {
     return (
     <div className="bg-success" style={{ "--bs-bg-opacity": 0.5 }}> 
-        <div className='container-fluid text-center'>404: Nice try, but that doesn't exist. Return to sender. Address unknown.</div>;
+        <div className='container-fluid text-center'>404: Return to sender. Address unknown.</div>;
     </div>
     )
   } 

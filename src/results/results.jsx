@@ -2,7 +2,7 @@ import React from 'react';
 
 export function Results() {
     return (
-        <main className='bg-success' style={{ "--bs-bg-opacity": 0.5 }}>
+        <main>
             <div>Results displayed here</div>
         </main>
     )

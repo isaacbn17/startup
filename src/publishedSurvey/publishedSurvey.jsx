@@ -1,8 +1,8 @@
 import React from 'react';
 
-export function publishedSurvey() {
+export function PublishedSurvey() {
     return (
-        <main className='bg-success' style={{ "--bs-bg-opacity": 0.5 }}>
+        <main>
             <div>Published survey displayed here</div>
         </main>
     )

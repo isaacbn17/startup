@@ -3,5 +3,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
 
 export default function App() {
-    return <div className="bg-success" style="--bs-bg-opacity: .5;">App will display here</div>
-}
+    return <>
+    <div className="bg-success" style={{ "--bs-bg-opacity": 0.5 }}>App will display here</div>
+    </>

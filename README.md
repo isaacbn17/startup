@@ -97,3 +97,11 @@ Application authentication and authorization
 * **Stores application data in MongoDB** - The surveys are saved in MongoDB. When someone votes, the results are updated in MongoDB and retrieved at the results page.
 * **Stores and retrieves credentials in MongoDB** - Done!  Emails and hashed passwords are saved in MongoDB. They are retrieved when someone logs in. The user is displayed on the Create Survey page.
 * **Restricts application functionality based upon authentication** - Yes. No one can create a survey or vote on the current survey until they have logged in or signed up.
+
+## WebSocket
+
+When on the results page, a notification is sent via websocket when another user votes. The vote counts are automatically updated in the table.
+* **Backend listens for WebSocket connection** - Done.
+* **Frontend makes WebSocket connection** - Done.
+* **Data sent over WebSocket connection** - Done.
+* **WebSocket data displayed in the application interface** - Users are notified of someone voting and the new vote tally is displayed in the table.

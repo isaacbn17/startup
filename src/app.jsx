@@ -5,6 +5,7 @@ import { CreateSurvey } from './survey/survey';
 import { PublishedSurvey } from './publishedSurvey/publishedSurvey';
 import { Results } from './results/results';
 import { About } from './about/about';
+import { AuthState} from './login/authState';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import 'jquery/dist/jquery.min.js'
 // import 'bootstrap/dist/js/bootstrap.min.js'
@@ -30,15 +31,21 @@ export default function App() {
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="">Login</NavLink>
                             </li>
+                            {authState === AuthState.Authenticated && (
                             <li className="nav-item">
                                 <NavLink className="nav-link" aria-current="page" to="survey">Create Survey</NavLink>
                             </li>
+                            )}
+                            {authState === AuthState.Authenticated && (
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="publishedSurvey">Published Survey</NavLink>
                             </li>
+                            )}
+                            {authState === AuthState.Authenticated && (
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="results">Results</NavLink>
                             </li>
+                            )}
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="about">About</NavLink>
                             </li>

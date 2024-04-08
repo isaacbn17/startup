@@ -36,9 +36,9 @@ export function Unauthenticated(props) {
     <>
         <div id="loginDisplay">
             <div className="row g-3 align-items-center">
-                <div className="col-auto">
+                {/* <div className="col-auto">
                     <label for="inputemail" className="col-form-label">Email</label>
-                </div>
+                </div> */}
                 <div className="col-auto">
                     <input
                     className="form-control"
@@ -51,9 +51,9 @@ export function Unauthenticated(props) {
                     />
                 </div>
                 
-                <div className="col-auto">
+                {/* <div className="col-auto">
                     <label for="userPassword" className="col-form-label">Password</label>
-                </div>
+                </div> */}
                 <div className="col-auto">
                     <input
                     className="form-control"
@@ -65,10 +65,10 @@ export function Unauthenticated(props) {
                     />
                 </div>
                 <div className="col-auto">
-                    <Button type="submit" id="login_button" className="btn btn-light" onclick={() => loginUser()}>Login</Button>
+                    <Button type="submit" id="login_button" className="btn btn-light" onClick={() => loginUser()}>Login</Button>
                 </div>
                 <div className="col-auto">
-                    <Button type="submit" id="create_button" className="btn btn-light" onclick={() => signUp()}>Sign up</Button>
+                    <Button type="submit" id="create_button" className="btn btn-light" onClick={() => signUp()}>Sign up</Button>
                 </div>
             </div>
         </div>

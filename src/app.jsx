@@ -6,6 +6,8 @@ import { PublishedSurvey } from './publishedSurvey/publishedSurvey';
 import { Results } from './results/results';
 import { About } from './about/about';
 import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'jquery/dist/jquery.min.js'
+// import 'bootstrap/dist/js/bootstrap.min.js'
 import './app.css';
 
 export default function App() {

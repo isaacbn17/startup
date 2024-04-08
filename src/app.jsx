@@ -11,6 +11,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
 
 export default function App() {
+    const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
+    const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
+    const [authState, setAuthState] = React.useState(currentAuthState);
+
     return (
     <BrowserRouter>
         <div className="bg-success" style={{ "--bs-bg-opacity": 0.5 }}>

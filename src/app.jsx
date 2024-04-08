@@ -17,9 +17,10 @@ export default function App() {
     const [authState, setAuthState] = React.useState(currentAuthState);
 
     return (
+        
     <BrowserRouter>
-        <div className="bg-success" style={{ "--bs-bg-opacity": 0.5 }}>
-            <header className="container-fluid">
+        <div /*className="bg-success" style={{ "--bs-bg-opacity": 0.5 }}*/ >
+            <header className="container-fluid bg-success" style={{ "--bs-bg-opacity": 0.5}}>
                 <nav className="navbar navbar-expand-lg bg-light">
                     <div className="container-fluid">
                         <div className="navbar-brand">Group Voting</div>
@@ -55,6 +56,7 @@ export default function App() {
                 </nav>
             </header>
 
+            <main className="bg-success" style={{ "--bs-bg-opacity": 0.5, minHeight: 'calc(100vh - 56px)' }}>
             <Routes>
                 <Route path='/' element={
                     <Login 
@@ -72,8 +74,9 @@ export default function App() {
                 <Route path='/about' element={<About />} />
                 <Route path='*' element={<NotFound />}/>
             </Routes>
+            </main>
 
-            <footer className="bg-light">
+            <footer className="container-fluid bg-light">
                 <p>Created by Isaac Neuenschwander</p>
                 <a href="https://github.com/isaacbn17/startup.git">My GitHub Repository</a>
             </footer>

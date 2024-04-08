@@ -22,7 +22,7 @@ export function Unauthenticated(props) {
             'Content-type': 'application/json; charset=UTF-8',
           },
         });
-        if (response?.status === 200) {
+        if (response.ok) {
           localStorage.setItem('userName', userName);
           props.onLogin(userName);
         } else {
@@ -36,9 +36,9 @@ export function Unauthenticated(props) {
     <>
         <div id="loginDisplay">
             <div className="row g-3 align-items-center">
-                {/* <div className="col-auto">
-                    <label for="inputemail" className="col-form-label">Email</label>
-                </div> */}
+                <div className="col-auto">
+                    <label htmlFor="inputemail" className="col-form-label">Email</label>
+                </div>
                 <div className="col-auto">
                     <input
                     className="form-control"
@@ -51,9 +51,9 @@ export function Unauthenticated(props) {
                     />
                 </div>
                 
-                {/* <div className="col-auto">
-                    <label for="userPassword" className="col-form-label">Password</label>
-                </div> */}
+                <div className="col-auto">
+                    <label htmlFor="userPassword" className="col-form-label">Password</label>
+                </div>
                 <div className="col-auto">
                     <input
                     className="form-control"

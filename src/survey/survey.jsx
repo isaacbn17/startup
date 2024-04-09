@@ -1,9 +1,30 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'
 
 export function CreateSurvey( {userName} ) { 
-
+    const navigate = useNavigate();
     const [surveyQuestion, setSurveyQuestion] = React.useState('');
-    const [answers, setAnswers] = React.useState(Array(4).fill(''));
+    const [answers, setAnswers] = React.useState([]);
+
+    // const scoreRows = [];
+    // if (scores.length) {
+    //   for (const [i, score] of scores.entries()) {
+    //     scoreRows.push(
+    //       <tr key={i}>
+    //         <td>{i}</td>
+    //         <td>{score.name.split('@')[0]}</td>
+    //         <td>{score.score}</td>
+    //         <td>{score.date}</td>
+    //       </tr>
+    //     );
+    //   }
+    // } else {
+    //   scoreRows.push(
+    //     <tr key='0'>
+    //       <td colSpan='4'>Be the first to score</td>
+    //     </tr>
+    //   );
+    // }
 
     // Sets surveyData using backend
     function handleAnswerChange(e, index) {
@@ -16,7 +37,7 @@ export function CreateSurvey( {userName} ) {
         e.preventDefault();
         try {
             await publishSurvey(answers, surveyQuestion);
-            window.location.href = 'publishedSurvey.html';
+            navigate('/publishedSurvey')
         } catch (error) {
             console.log("Error publishing survey ", error);
         }
@@ -34,20 +55,15 @@ export function CreateSurvey( {userName} ) {
             resultsCount: results
         };
 
-        try {
-            const response = await fetch('/api/survey', {
-                method: 'POST',
-                headers: {'content-type': 'application/json'},
-                body: JSON.stringify(formData),
-            });
-    
-            // Store what the service gave us as the survey
-            const surveyData = await response.json();
-            console.log(surveyData);
-            localStorage.setItem('surveyData', JSON.stringify(surveyData));
-        } catch {
-            // publishSurveyLocal(formData);
-        }
+        const response = await fetch('/api/survey', {
+            method: 'POST',
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify(formData),
+        });
+        // Store what the service gave us as the survey
+        const surveyData = await response.json();
+        console.log(surveyData);
+        localStorage.setItem('surveyData', JSON.stringify(surveyData));
     }
 
     return (
@@ -66,19 +82,19 @@ export function CreateSurvey( {userName} ) {
                 <br/>
                 <label type="text" className="sinput" htmlFor="answer1">Answer</label>
                 <input type="text" className="sinput" id="answer1" name="answer1" placeholder="Survey Answer"
-                    onChange={(e) => handleAnswerChange(e, 1)} required/>
+                    onChange={(e) => handleAnswerChange(e, 0)} required/>
                 <br/>
                 <label type="text" className="sinput" htmlFor="answer2">Answer</label>
                 <input type="text" className="sinput" id="answer2" name="answer2" placeholder="Survey Answer"
-                    onChange={(e) => handleAnswerChange(e, 2)} required/>
+                    onChange={(e) => handleAnswerChange(e, 1)} required/>
                 <br/>
                 <label type="text" className="sinput" htmlFor="answer3">Answer</label>
                 <input type="text" className="sinput" id="answer3" name="answer3" placeholder="Survey Answer"
-                    onChange={(e) => handleAnswerChange(e, 3)}/>
+                    onChange={(e) => handleAnswerChange(e, 2)}/>
                 <br/>
                 <label type="text" className="sinput" htmlFor="answer4">Answer</label>
                 <input type="text" className="sinput" id="answer4" name="answer4" placeholder="Survey Answer"
-                    onChange={(e) => handleAnswerChange(e, 4)}/>
+                    onChange={(e) => handleAnswerChange(e, 3)}/>
                 <br/>
                 <button type="submit" id="publish_button" className="btn btn-light">Publish</button>
             </form>

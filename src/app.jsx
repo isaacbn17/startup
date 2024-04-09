@@ -67,7 +67,7 @@ export default function App() {
                         }}
                         />}
                         exact />
-                <Route path='/survey' element={<CreateSurvey />} />
+                <Route path='/survey' element={<CreateSurvey userName={userName} />} />
                 <Route path='/publishedSurvey' element={<PublishedSurvey />}/>
                 <Route path='/results' element={<Results />}/>
                 <Route path='/about' element={<About />} />

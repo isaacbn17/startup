@@ -1,38 +1,39 @@
 import React from 'react';
 
-export function CreateSurvey( {userName} ) {
-    // function getPlayerName() {
-    //     return localStorage.getItem('userName') ?? 'Unkown User';
-    //     }
+export function CreateSurvey( {userName} ) { 
+
+    const [surveyQuestion, setSurveyQuestion] = React.useState('');
+    const [answers, setAnswers] = React.useState(Array(4).fill(''));
+
+    // Sets surveyData using backend
+    function handleAnswerChange(e, index) {
+        const updatedAnswers = [...answers];
+        updatedAnswers[index] = e.target.value;
+        setAnswers(updatedAnswers);
+    };
     
-    // const userNameEl = document.querySelector('.user-email');
-    // userNameEl.textContent = this.getPlayerName();   
-    
-    async function publishSurvey() {
-        // event.preventDefault();
-        const surveyQuestion = document.querySelector('#question').value;
-        const answers = [];
-        for (i=1; i<=4; i++) {
-            const answer = document.getElementById(`answer${i}`).value;
-            if (answer !== '') {
-                answers.push(answer);
-            }
+    async function handleSubmit(e) {
+        e.preventDefault();
+        try {
+            await publishSurvey(answers, surveyQuestion);
+            window.location.href = 'publishedSurvey.html';
+        } catch (error) {
+            console.log("Error publishing survey ", error);
         }
-    
-        const results = {};
+    }
+
+    async function publishSurvey(answers, surveyQuestion) {
+        let results = {};
         answers.forEach(answer => {
             results[answer] = 0;
         });
-    
+
         const formData = {
             question: surveyQuestion,
             answers: answers,
             resultsCount: results
         };
-    
-        // Sets surveyData using backend
-        console.log(formData);
-        console.log(JSON.stringify(formData));
+
         try {
             const response = await fetch('/api/survey', {
                 method: 'POST',
@@ -47,35 +48,6 @@ export function CreateSurvey( {userName} ) {
         } catch {
             // publishSurveyLocal(formData);
         }
-        window.location.href = 'publishedSurvey.html';
-    };
-    
-    function publishSurveyLocal (formData) {
-        localStorage.setItem('currentSurvey', JSON.stringify(formData));
-        let surveyData = JSON.parse(localStorage.getItem('surveyData'));
-        if (surveyData !== null) {
-            surveyData.push(formData);
-        }
-        else {
-            surveyData = [];
-            surveyData.push(formData);
-        }
-        localStorage.setItem('surveyData', JSON.stringify(surveyData));
-    
-        let results = JSON.parse(localStorage.getItem('resultsCount'));
-        if (results !== null) {
-            formData.answers.forEach(answer => {
-                results[answer] = 0;
-            });
-        }
-        else {
-            results = {};
-            formData.answers.forEach(answer => {
-                results[answer] = 0;
-            });
-        }
-        localStorage.setItem('resultsCount', JSON.stringify(results));
-        window.location.href = 'publishedSurvey.html';
     }
 
     return (
@@ -86,36 +58,31 @@ export function CreateSurvey( {userName} ) {
         </div>
 
         <div className="survey">
-            <form id="surveyForm" method="post">
-                <br />
+            <form id="surveyForm" onSubmit={handleSubmit}>
+                <br /> 
                 <label type="text" className="sinput" htmlFor="question">Question </label>
-                <input type="text" className="sinput" id="question" name="question" placeholder="Survey Question" required/>
+                <input type="text" className="sinput" id="question" name="question" placeholder="Survey Question" 
+                    onChange={(e) => setSurveyQuestion(e.target.value)} required/>
                 <br/>
                 <label type="text" className="sinput" htmlFor="answer1">Answer</label>
-                <input type="text" className="sinput" id="answer1" name="answer1" placeholder="Survey Answer" required/>
+                <input type="text" className="sinput" id="answer1" name="answer1" placeholder="Survey Answer"
+                    onChange={(e) => handleAnswerChange(e, 1)} required/>
                 <br/>
                 <label type="text" className="sinput" htmlFor="answer2">Answer</label>
-                <input type="text" className="sinput" id="answer2" name="answer2" placeholder="Survey Answer" required/>
+                <input type="text" className="sinput" id="answer2" name="answer2" placeholder="Survey Answer"
+                    onChange={(e) => handleAnswerChange(e, 2)} required/>
                 <br/>
                 <label type="text" className="sinput" htmlFor="answer3">Answer</label>
-                <input type="text" className="sinput" id="answer3" name="answer3" placeholder="Survey Answer"/>
+                <input type="text" className="sinput" id="answer3" name="answer3" placeholder="Survey Answer"
+                    onChange={(e) => handleAnswerChange(e, 3)}/>
                 <br/>
                 <label type="text" className="sinput" htmlFor="answer4">Answer</label>
-                <input type="text" className="sinput" id="answer4" name="answer4" placeholder="Survey Answer"/>
+                <input type="text" className="sinput" id="answer4" name="answer4" placeholder="Survey Answer"
+                    onChange={(e) => handleAnswerChange(e, 4)}/>
                 <br/>
-                <button type="submit" id="publish_button" className="btn btn-light" >Publish</button>
-                {/* onclick="publishSurvey(event)" */}
-
+                <button type="submit" id="publish_button" className="btn btn-light">Publish</button>
             </form>
         </div>
-
-        {/* <script>
-            function handleFormSubmit(event) {
-                preventDefault();
-                publishSurvey();
-            }
-            document.getElementById('surveyForm').addEventListener('submit', handleFormSubmit);
-        </script> */}
     </main>
     )
 }

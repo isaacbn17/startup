@@ -21,6 +21,9 @@ export function Authenticated(props) {
     return (
         <div>
             <div className='playerName'>{props.userName}</div>
+            <Button className="btn btn-light" onClick={() => navigate('/Survey')}>
+                Create Survey
+            </Button>
             <Button className="btn btn-light" onClick={() => navigate('/publishedSurvey')}>
                 Published Survey
             </Button>

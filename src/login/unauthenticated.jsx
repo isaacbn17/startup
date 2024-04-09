@@ -1,12 +1,17 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
+import { useNavigate } from 'react-router-dom';
 
 export function Unauthenticated(props) {
     const [userName, setUserName] = React.useState(props.userName);
     const [password, setPassword] = React.useState('');
     const [errorMessage, setErrorMessage] = React.useState(null);
+    const navigate = useNavigate();
 
     async function loginUser() {
+        console.log("You're in loginUser");
+        console.log(userName);
+        console.log(password);
         loginOrCreate(`/api/auth/login`);
       }
     
@@ -25,10 +30,12 @@ export function Unauthenticated(props) {
         if (response.ok) {
           localStorage.setItem('userName', userName);
           props.onLogin(userName);
+          navigate('/publishedSurvey')
         } else {
-          const errorMessage = await response.json();
-          const errorMsgText = errorMessage.msg;
-          setErrorMessage(errorMsgText);
+          console.log("Uh oh");
+          // const errorMessage = await response.json();
+          // const errorMsgText = errorMessage.msg;
+          // setErrorMessage(errorMsgText);
         }
       }
 

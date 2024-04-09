@@ -7,8 +7,7 @@ import { Results } from './results/results';
 import { About } from './about/about';
 import { AuthState} from './login/authState';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import 'jquery/dist/jquery.min.js'
-// import 'bootstrap/dist/js/bootstrap.min.js'
+import "https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
 import './app.css';
 
 export default function App() {

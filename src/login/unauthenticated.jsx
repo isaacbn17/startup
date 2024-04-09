@@ -33,9 +33,9 @@ export function Unauthenticated(props) {
           navigate('/publishedSurvey')
         } else {
           console.log("Uh oh");
-          // const errorMessage = await response.json();
-          // const errorMsgText = errorMessage.msg;
-          // setErrorMessage(errorMsgText);
+          const errorMessage = await response.json();
+          const errorMsgText = errorMessage.msg;
+          setErrorMessage(errorMsgText);
         }
       }
 

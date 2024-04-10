@@ -2,10 +2,11 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 
+
 export function PublishedSurvey() {
     const navigate = useNavigate();
     let [survey, setSurvey] = React.useState({});
-
+    
     React.useEffect(() => {
         fetch('/api/publishedSurvey')
             .then((response) => response.json())
@@ -14,11 +15,44 @@ export function PublishedSurvey() {
                 console.log(survey.question);
                 console.log(survey.answers);
                 console.log("You did it!")
+                survey.answers.map((element, index) => {
+                    console.log(`Element at index ${index}: ${element}`);
+                    return null; // You need to return something from the map function
+                });
             })
             .catch((e) => {
                 console.error('Failed to get survey\n' + e);
             })
-    }, []); 
+        }, []); 
+        
+
+    function handleAnswerSelect(e) {
+        const selectedAnswer = e.target.nextElementSibling.textContent;
+        localStorage.setItem('selectedAnswer', selectedAnswer);
+    }
+
+    return (
+        <main>
+            {survey.answers && (
+            <div id="survey_container">
+                <h2>{survey.question}</h2>
+                <ul className="answerPublished">
+                    {survey.answers.map((answer, key) => {
+                        return (
+                        <li id={key}>
+                            <input type="radio" className="radioButton" onChange={handleAnswerSelect} />
+                            <span className="answerText">{answer}</span>
+                        </li>
+                        )
+                    }
+                    )}
+                </ul>
+            </div>
+            )}
+            <Button className="btn btn-light" onClick={() => navigate('/results') }>Vote</Button>
+        </main>
+    )
+}
 
     // const questions = [];
     // const answerElements = [];
@@ -72,20 +106,3 @@ export function PublishedSurvey() {
     //     survey_container.appendChild(answerlist);
     //     survey_container.appendChild(submit_button);
     // }
-
-    return (
-        <main>
-            {survey.answers && (
-            <div id="survey_container">
-                <h2>{survey.question}</h2>
-                <ul className="answerPublished">
-                    {survey.answers.map((answer, index) => 
-                        <li>{answer}</li>
-                    )}
-                </ul>
-            </div>
-            )}
-            <Button className="btn btn-light" onClick={() => navigate('/results') }>Vote</Button>
-        </main>
-    )
-}

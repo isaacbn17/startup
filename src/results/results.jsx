@@ -1,5 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './results.css';
+
 
 export function Results() {
     const [surveys, setSurveys] = React.useState([]);
@@ -16,9 +18,9 @@ export function Results() {
             })
         }, []);
 
-    function MakeSurveyRow( {survey} ) {
+    function MakeSurveyRow( {survey}, key) {
         return (
-            <tr>
+            <tr key={key}>
                 <td>{survey.question}</td>
                 {survey.answers.map((answer, key) => {
                     return (
@@ -45,7 +47,7 @@ export function Results() {
                     <tbody id="resultsContainer">
                         {surveys.map((survey, key) => {
                             return (
-                            <MakeSurveyRow survey={survey} />
+                            <MakeSurveyRow survey={survey} key={key} />
                             )
                         })}
                     </tbody>

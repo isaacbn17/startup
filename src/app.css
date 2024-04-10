@@ -70,6 +70,8 @@ h2 {
 
 .results {
     justify-content: flex-start;
+    /* text-align: left; */
+    
 }
 
 img {

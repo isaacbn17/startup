@@ -29,6 +29,13 @@ export function PublishedSurvey() {
     function handleAnswerSelect(e) {
         const selectedAnswer = e.target.nextElementSibling.textContent;
         localStorage.setItem('selectedAnswer', selectedAnswer);
+        const username = localStorage.getItem('userName') ?? 'Unkown User';
+        const userVote = {
+            name: username,
+            answer: selectedAnswer,
+        };
+        localStorage.setItem('vote', JSON.stringify(userVote));
+        console.log(selectedAnswer);
     }
 
     return (
@@ -40,7 +47,7 @@ export function PublishedSurvey() {
                     {survey.answers.map((answer, key) => {
                         return (
                         <li id={key}>
-                            <input type="radio" className="radioButton" onChange={handleAnswerSelect} />
+                            <input type="radio" className="radioButton" name="surveyAnswer" onChange={handleAnswerSelect} />
                             <span className="answerText">{answer}</span>
                         </li>
                         )
@@ -53,56 +60,3 @@ export function PublishedSurvey() {
         </main>
     )
 }
-
-    // const questions = [];
-    // const answerElements = [];
-    // for (const answer of survey.answers) {
-    //     questions.append(answer);
-    // }
-    // survey.answers.forEach(answer => {
-    // })
-
-    // displaySurvey(survey.question, survey.answers);
-    // function displaySurvey(question, answers) {    
-    //     const answerlist = document.createElement('ul');
-    //     answers.forEach(answer => {
-    //         const answerElement = document.createElement('li');
-    //         answerElement.classList.add('answerEl')
-    
-    //         const button = document.createElement('input');
-    //         button.type = 'radio';
-    //         button.classList.add('radioButton');
-    //         button.name = 'radioButton';
-    //         answerElement.appendChild(button);
-    
-    //         const text = document.createElement('span');
-    //         text.textContent = answer;
-    //         text.classList.add('answerText');
-    //         answerElement.appendChild(text);
-    
-    //         answerlist.appendChild(answerElement);
-    
-    //         button.addEventListener('click', function saveAnswer() {
-    //             localStorage.setItem('selectedAnswer', JSON.stringify(text.textContent))
-    //             const username = localStorage.getItem('userName') ?? 'Unkown User';
-    //             const userVote = {
-    //                 name: username,
-    //                 answer: text.textContent,
-    //             };
-    //             localStorage.setItem('vote', JSON.stringify(userVote));
-    //         })
-    //     });
-    
-    //     const submit_button = document.createElement('button');
-    //     submit_button.classList.add('btn', 'btn-light');
-    //     submit_button.type = 'submit';
-    //     submit_button.textContent = 'Submit';
-    //     // When someone votes, the vote is sent to the websocket so it can be displayed on the results page
-    //     submit_button.addEventListener('click', () => {
-    //         // socket.send(`{"name":"${username}", "answer":"${answer}"}`)
-    //         window.location.href = 'results.html';
-    //     });
-    
-    //     survey_container.appendChild(answerlist);
-    //     survey_container.appendChild(submit_button);
-    // }

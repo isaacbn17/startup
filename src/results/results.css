@@ -18,15 +18,16 @@ main {
     font-family: 'Open Sans', sans-serif;
 }
 
-h2 {
-    padding: 0.5em;
-    font-size: 25px
-}
-
 .results {
     justify-content: flex-start;
+    width: 100%;
+    text-align: left;
+    padding-top: 1em;
 }
 
+/* .table * {
+    background-color: transparent;
+} */
 
 div.websocketEvent {
     font-size: 15px;

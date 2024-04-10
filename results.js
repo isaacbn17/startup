@@ -76,10 +76,6 @@ function displayResults(surveyData) {
     resultsContainer.textContent = "";
 
     surveyData.forEach(survey => {
-        // console.log("This survey is: ");
-        // console.log(survey.question);
-        // console.log(survey.resultsCount);
-
         const tableRow = document.createElement('tr');
 
         const question = document.createElement('td');

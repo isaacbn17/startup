@@ -46,7 +46,7 @@ export function PublishedSurvey() {
                 <ul className="answerPublished">
                     {survey.answers.map((answer, key) => {
                         return (
-                        <li id={key}>
+                        <li key={key}>
                             <input type="radio" className="radioButton" name="surveyAnswer" onChange={handleAnswerSelect} />
                             <span className="answerText">{answer}</span>
                         </li>

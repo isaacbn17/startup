@@ -27,6 +27,9 @@ export function Authenticated(props) {
             <Button className="btn btn-light" onClick={() => navigate('/publishedSurvey')}>
                 Published Survey
             </Button>
+            <Button className="btn btn-light" onClick={() => navigate('/results')}>
+                Results
+            </Button>
             <Button className="btn btn-light" onClick={() => logout()}>
                 Logout
             </Button>

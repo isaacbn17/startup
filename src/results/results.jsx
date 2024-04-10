@@ -14,7 +14,20 @@ export function Results() {
             .catch((e) => {
                 console.error('Failed to get surveys \n' + e);
             })
-        }, []); 
+        }, []);
+
+    function MakeSurveyRow( {survey} ) {
+        return (
+            <tr>
+                <td>{survey.question}</td>
+                {survey.answers.map((answer, key) => {
+                    return (
+                        <td key={key}>{answer}</td>
+                    )
+                })}
+            </tr>
+        )
+    }
 
     return (
         <main className="results">
@@ -28,7 +41,15 @@ export function Results() {
                         <th>Answer 4</th>
                     </tr>
                 </thead>
-                <tbody id="resultsContainer"></tbody>
+                {surveys.length > 0 && (
+                    <tbody id="resultsContainer">
+                        {surveys.map((survey, key) => {
+                            return (
+                            <MakeSurveyRow survey={survey} />
+                            )
+                        })}
+                    </tbody>
+                )}
             </table>
 
             <div id="surveyNotifications"></div>        

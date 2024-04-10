@@ -2,6 +2,20 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export function Results() {
+    const [surveys, setSurveys] = React.useState([]);
+
+    React.useEffect(() => {
+        fetch('/api/results')
+            .then((response) => response.json())
+            .then((surveys) => {
+                setSurveys(surveys);
+                console.log(surveys);
+            })
+            .catch((e) => {
+                console.error('Failed to get surveys \n' + e);
+            })
+        }, []); 
+
     return (
         <main className="results">
             <table className="table table-striped">

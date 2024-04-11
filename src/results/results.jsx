@@ -2,36 +2,64 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './results.css';
 
+async function updateCount(answer) {
+    console.log("Participant's answer: ")
+    console.log(answer);
+    // Change the count for the most recently published survey
+    try {
+        console.log('In try block')
+        const response = await fetch('/api/results', {
+            method: 'PUT',
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify({ answer: answer }),
+        });
+    }
+    catch (e) {
+        console.error('Something went wrong\n' + e);
+    }
+    return 0;
+};
 
 export function Results() {
     const [surveys, setSurveys] = React.useState([]);
+    // const [socket, setSocket] = React.useState(null);
+
+    // React.useEffect(() => {
+    //     // Establish WebSocket connection
+    //     const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+    //     const newSocket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+
+    //     newSocket.onopen = (event) => {
+    //         console.log('WebSocket connected');
+    //     };
+
+    //     newSocket.onclose = (event) => {
+    //         console.log('WebSocket disconnected');
+    //     };
+
+    //     newSocket.onmessage = (event) => {
+    //         const data = JSON.parse(event.data);
+    //         console.log(data);
+    //         setSurveys(data);
+    //     };
+
+    //     setSocket(newSocket);
+
+    //     // Cleanup function to close WebSocket connection when component unmounts
+    //     return () => {
+    //         newSocket.close();
+    //     };
+    // }, []);
 
     React.useEffect(() => {
-        function handleWebSocketMessage(event) {
-            const data = JSON.parse(event.data);
-            console.log(data);
-            setSurveys(data);
+        const selectedAnswer = JSON.parse(localStorage.getItem('selectedAnswer'));
+        if (selectedAnswer) {
+            // const userVote = JSON.parse(localStorage.getItem('vote'));
+            // socket.send(userVote);
+            updateCount(selectedAnswer);        
+            localStorage.removeItem('selectedAnswer');
         }
 
-        const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
-        const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
-
-        socket.onopen = (event) => {
-            console.log('WebSocket connected');
-        };
-
-        socket.onclose = (event) => {
-            console.log('WebSocket disconnected');
-        };
-
-        socket.onmessage = handleWebSocketMessage;
-
-        return () => {
-            socket.close();
-        };
-    }, []);
-
-    React.useEffect(() => {
         fetch('/api/results')
             .then((response) => response.json())
             .then((surveys) => {

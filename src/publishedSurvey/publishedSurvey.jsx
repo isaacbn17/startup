@@ -12,13 +12,6 @@ export function PublishedSurvey() {
             .then((response) => response.json())
             .then((survey) => {
                 setSurvey(survey);
-                console.log(survey.question);
-                console.log(survey.answers);
-                console.log("You did it!")
-                survey.answers.map((element, index) => {
-                    console.log(`Element at index ${index}: ${element}`);
-                    return null; // You need to return something from the map function
-                });
             })
             .catch((e) => {
                 console.error('Failed to get survey\n' + e);
@@ -28,7 +21,7 @@ export function PublishedSurvey() {
 
     function handleAnswerSelect(e) {
         const selectedAnswer = e.target.nextElementSibling.textContent;
-        localStorage.setItem('selectedAnswer', selectedAnswer);
+        localStorage.setItem('selectedAnswer', JSON.stringify(selectedAnswer));
         const username = localStorage.getItem('userName') ?? 'Unkown User';
         const userVote = {
             name: username,

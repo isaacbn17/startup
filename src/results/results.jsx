@@ -4,11 +4,8 @@ import './results.css';
 import { SurveyEvent, SurveyNotifier } from './surveyNotifier';
 
 async function updateCount(answer) {
-    console.log("Participant's answer: ")
-    console.log(answer);
     // Change the count for the most recently published survey
     try {
-        console.log('In try block')
         const response = await fetch('/api/results', {
             method: 'PUT',
             headers: {'content-type': 'application/json'},
@@ -28,7 +25,8 @@ export function Results() {
     React.useEffect(() => {
         const selectedAnswer = JSON.parse(localStorage.getItem('selectedAnswer'));
         if (selectedAnswer) {
-            // const userVote = JSON.parse(localStorage.getItem('vote'));
+            const userName = localStorage.getItem('userName')
+            SurveyNotifier.broadcastEvent(userName, SurveyEvent.Start, {});
             updateCount(selectedAnswer);        
             localStorage.removeItem('selectedAnswer');
         }
@@ -37,7 +35,6 @@ export function Results() {
             .then((response) => response.json())
             .then((surveys) => {
                 setSurveys(surveys);
-                console.log(surveys);
             })
             .catch((e) => {
                 console.error('Failed to get surveys \n' + e);
@@ -67,12 +64,17 @@ export function Results() {
     });
 
     function handleSurveyEvent(event) {
+        console.log("In handleSurveyEvent")
         setEvents([...events, event]);
+        console.log(events);
     }
 
     function createMessages() {
+        console.log('createMessages is called')
         const messageArray = [];
         for (const [i, event] of events.entries()) {
+            console.log("event: ")
+            console.log(event);
             let message = 'unknown';
             if (event.type === SurveyEvent.Vote) {
                 message = `voted ${event.value.msg}`;

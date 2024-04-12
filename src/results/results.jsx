@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './results.css';
+import { SurveyEvent, SurveyNotifier } from './surveyNotifier';
 
 async function updateCount(answer) {
     console.log("Participant's answer: ")
@@ -22,40 +23,12 @@ async function updateCount(answer) {
 
 export function Results() {
     const [surveys, setSurveys] = React.useState([]);
-    // const [socket, setSocket] = React.useState(null);
-
-    // React.useEffect(() => {
-    //     // Establish WebSocket connection
-    //     const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
-    //     const newSocket = new WebSocket(`${protocol}://${window.location.host}/ws`);
-
-    //     newSocket.onopen = (event) => {
-    //         console.log('WebSocket connected');
-    //     };
-
-    //     newSocket.onclose = (event) => {
-    //         console.log('WebSocket disconnected');
-    //     };
-
-    //     newSocket.onmessage = (event) => {
-    //         const data = JSON.parse(event.data);
-    //         console.log(data);
-    //         setSurveys(data);
-    //     };
-
-    //     setSocket(newSocket);
-
-    //     // Cleanup function to close WebSocket connection when component unmounts
-    //     return () => {
-    //         newSocket.close();
-    //     };
-    // }, []);
+    const [events, setEvents] = React.useState([]);
 
     React.useEffect(() => {
         const selectedAnswer = JSON.parse(localStorage.getItem('selectedAnswer'));
         if (selectedAnswer) {
             // const userVote = JSON.parse(localStorage.getItem('vote'));
-            // socket.send(userVote);
             updateCount(selectedAnswer);        
             localStorage.removeItem('selectedAnswer');
         }
@@ -85,6 +58,38 @@ export function Results() {
         )
     }
 
+    React.useEffect(() => {
+        SurveyNotifier.addHandler(handleSurveyEvent);
+
+        return () => {
+            SurveyNotifier.removeHandler(handleSurveyEvent);
+        };
+    });
+
+    function handleSurveyEvent(event) {
+        setEvents([...events, event]);
+    }
+
+    function createMessages() {
+        const messageArray = [];
+        for (const [i, event] of events.entries()) {
+            let message = 'unknown';
+            if (event.type === SurveyEvent.Vote) {
+                message = `voted ${event.value.msg}`;
+            } else if (event.type === SurveyEvent.System) {
+                message = event.value.msg;
+            }
+
+            messageArray.push(
+                <div key={i} className='event'>
+                    <span className={'user-event'}>{event.from}</span>
+                    {message}
+                </div>
+            );
+        }
+        return messageArray;
+    }
+
     return (
         <main className="results">
             <table className="table table-striped table-success">
@@ -108,7 +113,7 @@ export function Results() {
                 )}
             </table>
 
-            <div id="surveyNotifications"></div>        
+            <div id="surveyNotifications">{createMessages()}</div>        
         </main>
     )
 }

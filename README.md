@@ -105,3 +105,12 @@ When on the results page, a notification is sent via websocket when another user
 * **Frontend makes WebSocket connection** - Done.
 * **Data sent over WebSocket connection** - Done.
 * **WebSocket data displayed in the application interface** - Users are notified of someone voting and the new vote tally is displayed in the table.
+
+## React
+
+For this deliverable, I converted the application to React.
+
+* **Bundled** - done!
+* **Components** - There are components on all pages. On the results page, for example, MakeSurveyRow is a component.
+* **Router** - There is routing between the login page, make survey, pubished survey, results, and about page.
+* **Hooks** - On many pages, the useState hook is used. The useEffect hook is also used on the results page.

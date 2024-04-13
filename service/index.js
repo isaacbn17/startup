@@ -1,7 +1,7 @@
-const express = require('express');
-const app = express();
 const cookieParser = require('cookie-parser');
 const bcrypt =  require('bcrypt');
+const express = require('express');
+const app = express();
 const DB = require('./database.js');
 const { peerProxy } = require('./peerProxy.js');
 
@@ -17,7 +17,7 @@ app.use(express.static('startup'));
 
 app.set('trust proxy', true);
 
-var apiRouter = express.Router();
+const apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
 // Create authentication token for a new user
@@ -64,7 +64,7 @@ apiRouter.get('/user/:email', async (req, res) => {
 });
 
 // secureApiRouter verifies endpoint credentials
-var secureApiRouter = express.Router();
+const secureApiRouter = express.Router();
 apiRouter.use(secureApiRouter);
 
 secureApiRouter.use(async (req, res, next) => {
@@ -118,9 +118,9 @@ app.use(function (err, req, res, next) {
     res.status(500).send({ type: err.name, message: err.message });
   });
   
-app.use((_req, res) => {
-    res.sendFile('index.html', { root: 'C:/Users/ibneu/Documents/cs/cs260/startup'});
-});
+// app.use((_req, res) => {
+//     res.sendFile('index.html', { root: 'C:/Users/ibneu/Documents/cs/cs260/startup'});
+// });
 
 // sets cookie
 function setAuthCookie(res, authToken) {

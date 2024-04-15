@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
+// import Button from 'react-bootstrap/Button';
 
 export function Authenticated(props) {
     const navigate = useNavigate();
@@ -21,18 +21,18 @@ export function Authenticated(props) {
     return (
         <div>
             <div className='playerName'>{props.userName}</div>
-            <Button className="btn btn-light" onClick={() => navigate('/Survey')}>
+            <button className="btn btn-light" onClick={() => navigate('/Survey')}>
                 Create Survey
-            </Button>
-            <Button className="btn btn-light" onClick={() => navigate('/publishedSurvey')}>
+            </button>
+            <button className="btn btn-light" onClick={() => navigate('/publishedSurvey')}>
                 Published Survey
-            </Button>
-            <Button className="btn btn-light" onClick={() => navigate('/results')}>
+            </button>
+            <button className="btn btn-light" onClick={() => navigate('/results')}>
                 Results
-            </Button>
-            <Button className="btn btn-light" onClick={() => logout()}>
+            </button>
+            <button className="btn btn-light" onClick={() => logout()}>
                 Logout
-            </Button>
+            </button>
         </div>
     );
 }

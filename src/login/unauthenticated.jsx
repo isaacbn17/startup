@@ -1,6 +1,6 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
+// import Button from 'react-bootstrap/Button';
 
 export function Unauthenticated(props) {
     const [userName, setUserName] = React.useState(props.userName);
@@ -72,10 +72,10 @@ export function Unauthenticated(props) {
                     />
                 </div>
                 <div className="col-auto">
-                    <Button type="submit" id="login_button" className="btn btn-light" onClick={() => loginUser()}>Login</Button>
+                    <button type="submit" id="login_button" className="btn btn-light" onClick={() => loginUser()}>Login</button>
                 </div>
                 <div className="col-auto">
-                    <Button type="submit" id="create_button" className="btn btn-light" onClick={() => signUp()}>Sign up</Button>
+                    <button type="submit" id="create_button" className="btn btn-light" onClick={() => signUp()}>Sign up</button>
                 </div>
             </div>
         </div>

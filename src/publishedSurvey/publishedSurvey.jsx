@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
+// import Button from 'react-bootstrap/Button';
 import './publishedSurvey.css'
 
 export function PublishedSurvey() {
@@ -49,7 +49,7 @@ export function PublishedSurvey() {
                 </ul>
             </div>
             )}
-            <Button className="btn btn-light" onClick={() => navigate('/results') }>Vote</Button>
+            <button className="btn btn-light" onClick={() => navigate('/results') }>Vote</button>
         </main>
     )
 }

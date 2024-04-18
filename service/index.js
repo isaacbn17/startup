@@ -81,7 +81,6 @@ secureApiRouter.use(async (req, res, next) => {
 secureApiRouter.post('/survey', async (req, res) => {
     const survey = { ...req.body };
     DB.postSurvey(survey);
-    // const surveyData = await DB.getSurveyData();
     res.send(survey);
 });
 

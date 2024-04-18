@@ -1,7 +1,5 @@
 import React from 'react';
-// import 'bootstrap/dist/css/bootstrap.min.css';
 import './results.css';
-import { SurveyEvent, SurveyNotifier } from './surveyNotifier';
 
 async function updateCount(answer) {
     // Change the count for the most recently published survey
@@ -20,13 +18,10 @@ async function updateCount(answer) {
 
 export function Results() {
     const [surveys, setSurveys] = React.useState([]);
-    const [events, setEvents] = React.useState([]);
 
     React.useEffect(() => {
         const selectedAnswer = JSON.parse(localStorage.getItem('selectedAnswer'));
         if (selectedAnswer) {
-            const userName = localStorage.getItem('userName')
-            SurveyNotifier.broadcastEvent(userName, SurveyEvent.Start, {});
             updateCount(selectedAnswer);        
             localStorage.removeItem('selectedAnswer');
         }
@@ -55,43 +50,6 @@ export function Results() {
         )
     }
 
-    React.useEffect(() => {
-        SurveyNotifier.addHandler(handleSurveyEvent);
-
-        return () => {
-            SurveyNotifier.removeHandler(handleSurveyEvent);
-        };
-    });
-
-    function handleSurveyEvent(event) {
-        console.log("In handleSurveyEvent")
-        setEvents([...events, event]);
-        console.log(events);
-    }
-
-    function createMessages() {
-        console.log('createMessages is called')
-        const messageArray = [];
-        for (const [i, event] of events.entries()) {
-            console.log("event: ")
-            console.log(event);
-            let message = 'unknown';
-            if (event.type === SurveyEvent.Vote) {
-                message = `voted ${event.value.msg}`;
-            } else if (event.type === SurveyEvent.System) {
-                message = event.value.msg;
-            }
-
-            messageArray.push(
-                <div key={i} className='event'>
-                    <span className={'user-event'}>{event.from}</span>
-                    {message}
-                </div>
-            );
-        }
-        return messageArray;
-    }
-
     return (
         <main className="results">
             <table className="table table-striped table-success">
@@ -114,8 +72,6 @@ export function Results() {
                     </tbody>
                 )}
             </table>
-
-            <div id="surveyNotifications">{createMessages()}</div>        
         </main>
     )
 }
